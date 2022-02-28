@@ -12,6 +12,14 @@ export const Title = styled.div`
     font-size: 100px;
     font-weight: 700;
   }
+
+  & h2 {
+    font-family: "Nanum Gothic Coding", monospace;
+    font-size: 80px;
+    color: white;
+    font-weight: 700;
+  }
+
   & span {
     font-family: "Nanum Myeongjo", serif;
     font-size: 150px;
