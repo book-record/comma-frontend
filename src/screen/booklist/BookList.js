@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 
 import LinkHeader from "../../common/compnents/LinkHeader";
+import ModalBackground from "../../common/compnents/ModalBackground";
 import PageButton from "../../common/compnents/PageButton";
 import { getBookList } from "../../service/book";
 
@@ -9,7 +10,7 @@ function BookList() {
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
-
+  const [isShow, setIsShow] = useState(false);
   const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   useEffect(() => {
@@ -38,6 +39,10 @@ function BookList() {
     setPageNumber(page);
   };
 
+  const handleOnModal = () => {
+    setIsShow(true);
+  };
+
   const handleChooseBook = () => {};
 
   const Header = useMemo(
@@ -55,7 +60,10 @@ function BookList() {
   return (
     <Background>
       {Header}
-      <div>등록하기</div>
+      <ModalButton type="button" onClick={handleOnModal}>
+        등록하기
+      </ModalButton>
+      <ModalBackground onClose={() => setIsShow(false)} show={isShow} />
       <BookListContainer>
         {posts.map((post) => (
           <BookFrame
@@ -111,6 +119,13 @@ const BookListContainer = styled.ul`
   grid-template-rows: repeat(2, 260px);
   gap: 20px;
   justify-content: center;
+`;
+
+const ModalButton = styled.button`
+  font-size: 25px;
+  margin: 10px;
+  border: none;
+  background: none;
 `;
 
 const BookFrame = styled.button`
