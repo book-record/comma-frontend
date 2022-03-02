@@ -2,25 +2,21 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function ModalBackground({ show, onClose }) {
+import ActiveButton from "./ActiveButton";
+
+function ModalBackground({ show, onClose, onClick, children, title }) {
   if (!show) {
     return null;
   }
   return (
     <ModalBack onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
-        <div>
-          <div>
-            <ModalTitle>Modal title</ModalTitle>
-          </div>
-          <ModalBody>This is modal content</ModalBody>
-          <div>
-            <button type="button" onClick={onClose}>
-              Close
-            </button>
-          </div>
-        </div>
-      </ModalContent>
+      <ModalInside onClick={(e) => e.stopPropagation()}>
+        <ModalContent>{children}</ModalContent>
+        <ButtonContainer>
+          <ActiveButton onClick={onClose} disabled={false} title="닫기" />
+          <ActiveButton onClick={onClick} disabled={false} title={title} />
+        </ButtonContainer>
+      </ModalInside>
     </ModalBack>
   );
 }
@@ -37,19 +33,33 @@ const ModalBack = styled.div`
   justify-content: center;
 `;
 
-const ModalContent = styled.div`
-  width: 1000px;
-  height: 600px;
+const ModalInside = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 1300px;
+  height: 650px;
   background-color: #fff1e8;
   border-radius: 10px;
 `;
 
-const ModalTitle = styled.h4`
-  margin: 0;
+const ModalContent = styled.div`
+  display: flex;
+  width: 1000px;
+  height: 470px;
+  background-color: #fff;
+  border-radius: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
 `;
 
-const ModalBody = styled.div`
-  padding: 10px;
+const ButtonContainer = styled.div`
+  width: 84%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
 `;
 
 export default ModalBackground;
@@ -57,4 +67,7 @@ export default ModalBackground;
 ModalBackground.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
 };

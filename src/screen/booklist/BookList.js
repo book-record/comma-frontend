@@ -1,16 +1,21 @@
 import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 
+import noImage from "../../assets/noImage.png";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageButton from "../../common/compnents/PageButton";
-import { getBookList } from "../../service/book";
+import { createBook, getBookList } from "../../service/book";
+import FindBook from "./FindBooks";
 
 function BookList() {
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
+  const [book, setBook] = useState([]);
   const [isShow, setIsShow] = useState(false);
+  const [isFind, setIsFind] = useState(false);
+
   const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
 
   useEffect(() => {
@@ -40,10 +45,15 @@ function BookList() {
   };
 
   const handleOnModal = () => {
+    setIsFind(false);
+    setBook([]);
     setIsShow(true);
   };
 
-  const handleChooseBook = () => {};
+  const handleChooseBook = async () => {
+    await createBook(book[0]);
+    setIsShow(false);
+  };
 
   const Header = useMemo(
     () => (
@@ -63,7 +73,33 @@ function BookList() {
       <ModalButton type="button" onClick={handleOnModal}>
         등록하기
       </ModalButton>
-      <ModalBackground onClose={() => setIsShow(false)} show={isShow} />
+      <ModalBackground
+        onClose={() => setIsShow(false)}
+        onClick={handleChooseBook}
+        show={isShow}
+        title="등록하기"
+        setBook={setBook}
+      >
+        <FindBook setBook={setBook} setIsFind={setIsFind} />
+        <ImageFrame>
+          {isFind && (
+            <ModalBookImage
+              src={book[0].thumbnail ? book[0].thumbnail : noImage}
+              alt={book[0].title}
+            />
+          )}
+        </ImageFrame>
+        <TextFrame>
+          {isFind && (
+            <div>
+              <div />
+              <TextTitle>{book[0].title}</TextTitle>
+              <TextAuthor>저자: {book[0].authors}</TextAuthor>
+              <TextContent>{book[0].contents}</TextContent>
+            </div>
+          )}
+        </TextFrame>
+      </ModalBackground>
       <BookListContainer>
         {posts.map((post) => (
           <BookFrame
@@ -148,6 +184,48 @@ const BookTitle = styled.p`
 const ActiveForm = styled.div`
   display: flex;
   justify-content: center;
+`;
+
+const ImageFrame = styled.div`
+  width: 50%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TextFrame = styled.div`
+  width: 50%;
+  height: 400px;
+`;
+
+const TextTitle = styled.div`
+  margin-top: 10px;
+  font-size: 20px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+`;
+
+const TextAuthor = styled.div`
+  font-size: 15px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  color: #da6d58;
+  margin: 20px 0 10px 0;
+  width: 90%;
+`;
+
+const TextContent = styled.div`
+  font-size: 15px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  width: 95%;
+  border-top: 1px solid black;
+  padding-top: 10px;
+`;
+
+const ModalBookImage = styled.img`
+  width: 45%;
 `;
 
 export default BookList;
