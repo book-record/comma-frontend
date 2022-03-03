@@ -25,7 +25,7 @@ export const createBook = async (list) => {
       }
     );
 
-    return data;
+    return data.result;
   } catch (error) {
     return error;
   }

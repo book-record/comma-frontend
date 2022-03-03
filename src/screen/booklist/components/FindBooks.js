@@ -2,21 +2,21 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 
-import noImage from "../../assets/noImage.png";
-import { bookSearch } from "../../service/bookSearch";
+import noImage from "../../../assets/noImage.png";
+import { bookSearch } from "../../../service/bookSearch";
 
-function FindBook({ setBook, setIsFind }) {
+function FindBook({ setBook, setIsChoice, setIsError }) {
   const [text, setText] = useState("");
-  const [item, setItem] = useState("");
+  const [selectedBook, setSelectedBook] = useState("");
   const [display, setDisplay] = useState(false);
   const [lists, setLists] = useState([]);
-  const chooseBook = useRef(null);
+  const choicedBook = useRef(null);
 
   useEffect(() => {
-    if (item.length > 0) {
-      handleSelectBook(item);
+    if (selectedBook.length > 0) {
+      handleSelectBook(selectedBook);
     }
-  }, [item]);
+  }, [selectedBook]);
 
   const handleSelectBook = useCallback(
     async (query) => {
@@ -29,17 +29,20 @@ function FindBook({ setBook, setIsFind }) {
       const { data } = await bookSearch(params);
 
       const result = data.documents.filter((book) =>
-        book.title.includes(chooseBook.current)
+        book.title.includes(choicedBook.current)
       );
+
+      setIsError(false);
+
       if (result.length) {
         setBook(result);
-        setIsFind(true);
+        setIsChoice(true);
         setLists([]);
       } else {
-        setIsFind(false);
+        setIsChoice(false);
       }
     },
-    [setBook, setIsFind]
+    [setBook, setIsChoice]
   );
 
   const handleSearchBook = useCallback(
@@ -62,16 +65,16 @@ function FindBook({ setBook, setIsFind }) {
 
   const handleOnEnter = (e) => {
     if (e.keyCode === 13) {
-      setItem(text);
-      chooseBook.current = text;
+      setSelectedBook(text);
+      choicedBook.current = text;
       setDisplay(false);
       setText("");
     }
   };
 
   const clickSelecteBook = (bookTitle) => {
-    setItem(bookTitle);
-    chooseBook.current = text;
+    setSelectedBook(bookTitle);
+    choicedBook.current = text;
     setDisplay(false);
     setText("");
   };
@@ -89,6 +92,10 @@ function FindBook({ setBook, setIsFind }) {
     setText(e.target.value);
   };
 
+  const handleClickBookTitle = () => {
+    setDisplay(!display);
+  };
+
   return (
     <Container>
       <BookInput
@@ -97,7 +104,7 @@ function FindBook({ setBook, setIsFind }) {
         name="query"
         onKeyDown={handleOnEnter}
         onChange={handleTextUpdate}
-        onClick={() => setDisplay(!display)}
+        onClick={handleClickBookTitle}
         value={text}
       />
       {display && (
@@ -166,5 +173,6 @@ export default FindBook;
 
 FindBook.propTypes = {
   setBook: PropTypes.func.isRequired,
-  setIsFind: PropTypes.func.isRequired,
+  setIsChoice: PropTypes.func.isRequired,
+  setIsError: PropTypes.func.isRequired,
 };

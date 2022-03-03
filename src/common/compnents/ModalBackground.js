@@ -56,7 +56,7 @@ const ModalContent = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 84%;
+  width: 77%;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;

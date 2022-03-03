@@ -4,19 +4,18 @@ import styled from "styled-components";
 import noImage from "../../assets/noImage.png";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
-import PageButton from "../../common/compnents/PageButton";
+import PageNation from "../../common/compnents/PageNation";
 import { createBook, getBookList } from "../../service/book";
-import FindBook from "./FindBooks";
+import FindBook from "./components/FindBooks";
 
 function BookList() {
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
-  const [book, setBook] = useState([]);
-  const [isShow, setIsShow] = useState(false);
-  const [isFind, setIsFind] = useState(false);
-
-  const pages = new Array(numberOfPages).fill(null).map((v, i) => i);
+  const [book, setBook] = useState();
+  const [shouldIsShow, setShouldIsShow] = useState(false);
+  const [isChoice, setIsChoice] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const callBookList = async () => {
@@ -32,27 +31,32 @@ function BookList() {
     callBookList();
   }, [pageNumber]);
 
-  const goToPreviousPage = () => {
-    setPageNumber(Math.max(0, pageNumber - 1));
-  };
-
-  const goToNextPage = () => {
-    setPageNumber(Math.min(numberOfPages - 1, pageNumber + 1));
-  };
-
-  const handleSelectPage = (page) => {
-    setPageNumber(page);
-  };
-
   const handleOnModal = () => {
-    setIsFind(false);
-    setBook([]);
-    setIsShow(true);
+    setBook();
+    setIsChoice(false);
+    setShouldIsShow(true);
+    setIsError(false);
   };
 
   const handleChooseBook = async () => {
-    await createBook(book[0]);
-    setIsShow(false);
+    if (!book[0].thumbnail) {
+      book[0].thumbnail = noImage;
+    }
+
+    if (!book[0].contents) {
+      book[0].contents = "줄거리가 존재하지 않습니다";
+    }
+    const result = await createBook(book[0]);
+
+    if (result === "ok") {
+      setShouldIsShow(false);
+      return;
+    }
+    setIsError(true);
+  };
+
+  const handleCloseModal = () => {
+    setShouldIsShow(false);
   };
 
   const Header = useMemo(
@@ -70,19 +74,23 @@ function BookList() {
   return (
     <Background>
       {Header}
-      <ModalButton type="button" onClick={handleOnModal}>
+      <OnModalButton type="button" onClick={handleOnModal}>
         등록하기
-      </ModalButton>
+      </OnModalButton>
       <ModalBackground
-        onClose={() => setIsShow(false)}
+        onClose={handleCloseModal}
         onClick={handleChooseBook}
-        show={isShow}
         title="등록하기"
+        show={shouldIsShow}
         setBook={setBook}
       >
-        <FindBook setBook={setBook} setIsFind={setIsFind} />
+        <FindBook
+          setBook={setBook}
+          setIsChoice={setIsChoice}
+          setIsError={setIsError}
+        />
         <ImageFrame>
-          {isFind && (
+          {isChoice && (
             <ModalBookImage
               src={book[0].thumbnail ? book[0].thumbnail : noImage}
               alt={book[0].title}
@@ -90,13 +98,18 @@ function BookList() {
           )}
         </ImageFrame>
         <TextFrame>
-          {isFind && (
+          {isChoice && (
             <div>
               <div />
               <TextTitle>{book[0].title}</TextTitle>
               <TextAuthor>저자: {book[0].authors}</TextAuthor>
               <TextContent>{book[0].contents}</TextContent>
             </div>
+          )}
+          {isError && (
+            <ErrorMessage>
+              이미 존재하는 책입니다 다른 책을 입력해주세요
+            </ErrorMessage>
           )}
         </TextFrame>
       </ModalBackground>
@@ -114,27 +127,11 @@ function BookList() {
       </BookListContainer>
 
       <footer>
-        <ActiveForm>
-          <PageButton
-            onClick={goToPreviousPage}
-            disabled={pageNumber === 0}
-            title="&lt;"
-          />
-          {pages.map((pageIndex) => (
-            <PageButton
-              key={pageIndex}
-              onClick={handleSelectPage.bind(this, pageIndex)}
-              title={pageIndex + 1}
-              disabled={pageNumber === pageIndex}
-            />
-          ))}
-
-          <PageButton
-            onClick={goToNextPage}
-            disabled={pageNumber === numberOfPages - 1}
-            title="&gt;"
-          />
-        </ActiveForm>
+        <PageNation
+          setPageNumber={setPageNumber}
+          pageNumber={pageNumber}
+          numberOfPages={numberOfPages}
+        />
       </footer>
     </Background>
   );
@@ -151,13 +148,13 @@ const Background = styled.div`
 
 const BookListContainer = styled.ul`
   display: grid;
-  grid-template-columns: repeat(3, 320px);
+  grid-template-columns: repeat(4, 320px);
   grid-template-rows: repeat(2, 260px);
   gap: 20px;
   justify-content: center;
 `;
 
-const ModalButton = styled.button`
+const OnModalButton = styled.button`
   font-size: 25px;
   margin: 10px;
   border: none;
@@ -179,11 +176,7 @@ const Image = styled.img`
 
 const BookTitle = styled.p`
   font-family: "Nanum Myeongjo", serif;
-`;
-
-const ActiveForm = styled.div`
-  display: flex;
-  justify-content: center;
+  font-size: 12px;
 `;
 
 const ImageFrame = styled.div`
@@ -226,6 +219,12 @@ const TextContent = styled.div`
 
 const ModalBookImage = styled.img`
   width: 45%;
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 25px;
+  margin-top: 15px;
 `;
 
 export default BookList;

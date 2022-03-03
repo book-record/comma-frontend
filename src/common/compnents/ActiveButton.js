@@ -11,7 +11,7 @@ function ActiveButton({ onClick, disabled, title }) {
 }
 
 const Button = styled.button`
-  width: 120px;
+  width: 110px;
   height: 50px;
   border: none;
   border-radius: 5px;
