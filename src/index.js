@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import GlobalStyle from "./common/compnents/style/GlobalStyle";
 import Book from "./screen/book/Book";
-import BookList from "./screen/booklist/BookList";
+import Bookpages from "./screen/bookpages/Bookpages";
 import Login from "./screen/login/Login";
 import Main from "./screen/main/Main";
 import store from "./store/store";
@@ -18,7 +18,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
-          <Route path="/bookList" element={<BookList />} />
+          <Route path="/bookList" element={<Bookpages />} />
           <Route path="/book:id" element={<Book />} />
         </Routes>
       </BrowserRouter>

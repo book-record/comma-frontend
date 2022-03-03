@@ -6,13 +6,14 @@ import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
 import { createBook, getBookList } from "../../service/book";
+import BookList from "./components/BookList";
 import FindBook from "./components/FindBooks";
 
-function BookList() {
+function Bookpages() {
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
-  const [book, setBook] = useState();
+  const [book, setBook] = useState([]);
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isChoice, setIsChoice] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -32,7 +33,7 @@ function BookList() {
   }, [pageNumber]);
 
   const handleOnModal = () => {
-    setBook();
+    setBook([]);
     setIsChoice(false);
     setShouldIsShow(true);
     setIsError(false);
@@ -113,19 +114,7 @@ function BookList() {
           )}
         </TextFrame>
       </ModalBackground>
-      <BookListContainer>
-        {posts.map((post) => (
-          <BookFrame
-            key={post._id}
-            type="button"
-            onClick={handleChooseBook.bind(this, post)}
-          >
-            <Image src={post.imageUrl} alt={posts.bookTitle} />
-            <BookTitle>{post.bookTitle}</BookTitle>
-          </BookFrame>
-        ))}
-      </BookListContainer>
-
+      <BookList posts={posts} />
       <footer>
         <PageNation
           setPageNumber={setPageNumber}
@@ -146,37 +135,11 @@ const Background = styled.div`
   height: 100%;
 `;
 
-const BookListContainer = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 320px);
-  grid-template-rows: repeat(2, 260px);
-  gap: 20px;
-  justify-content: center;
-`;
-
 const OnModalButton = styled.button`
   font-size: 25px;
   margin: 10px;
   border: none;
   background: none;
-`;
-
-const BookFrame = styled.button`
-  margin: 0 auto;
-  width: 250px;
-  background-color: white;
-  border-radius: 2px 20px 20px 2px;
-  box-shadow: 2px 1px 3px gray;
-`;
-
-const Image = styled.img`
-  width: 150px;
-  height: 200px;
-`;
-
-const BookTitle = styled.p`
-  font-family: "Nanum Myeongjo", serif;
-  font-size: 12px;
 `;
 
 const ImageFrame = styled.div`
@@ -227,4 +190,4 @@ const ErrorMessage = styled.div`
   margin-top: 15px;
 `;
 
-export default BookList;
+export default Bookpages;

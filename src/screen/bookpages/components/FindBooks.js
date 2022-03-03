@@ -42,7 +42,7 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
         setIsChoice(false);
       }
     },
-    [setBook, setIsChoice]
+    [setBook, setIsChoice, setIsError]
   );
 
   const handleSearchBook = useCallback(
@@ -54,10 +54,10 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
       };
       const { data } = await bookSearch(params);
 
-      const bookList = data.documents.filter((book) =>
+      const correctList = data.documents.filter((book) =>
         book.title.includes(text)
       );
-      setLists(bookList);
+      setLists(correctList);
       setDisplay(true);
     },
     [text]
