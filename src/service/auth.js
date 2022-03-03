@@ -18,7 +18,7 @@ export const firebaseLogin = async () => {
       }
     );
 
-    localStorage.setItem(AUTHORIZATION, data.token);
+    localStorage.setItem(AUTHORIZATION, `Bearer ${data.token}`);
     axios.defaults.headers.common[AUTHORIZATION] =
       localStorage.getItem(AUTHORIZATION);
 

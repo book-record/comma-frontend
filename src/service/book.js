@@ -14,3 +14,19 @@ export const getBookList = async (pageNumber) => {
     throw new Error("책 리스트를 불러오지 못했습니다");
   }
 };
+
+export const createBook = async (list) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/book/new`,
+      list,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return data.result;
+  } catch (error) {
+    return error;
+  }
+};
