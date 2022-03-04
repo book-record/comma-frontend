@@ -6,7 +6,7 @@ import styled from "styled-components";
 import googleLogo from "../../assets/googleButton.png";
 import { Title } from "../../common/constants/FONT";
 import { firebaseLogin } from "../../service/auth";
-import { signIn } from "../../store/loginSlice";
+import { signIn } from "../../store/userSlice";
 
 function Login() {
   const dispatch = useDispatch();

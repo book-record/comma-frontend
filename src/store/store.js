@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import loginRouter from "./loginSlice";
+import userRouter from "./userSlice";
 
 const store = configureStore({
   reducer: {
-    login: loginRouter,
+    login: userRouter,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

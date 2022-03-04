@@ -51,6 +51,7 @@ const Halfground = styled.button`
   background: #707274;
   &:hover {
     background: #e19894;
+    transition: all 0.35s ease-in;
   }
 `;
 

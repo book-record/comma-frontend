@@ -30,3 +30,18 @@ export const createBook = async (list) => {
     return error;
   }
 };
+
+export const getBook = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/book/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
