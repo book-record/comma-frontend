@@ -70,5 +70,9 @@ ModalBackground.propTypes = {
   onClose: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
+  children: PropTypes.node,
+};
+
+ModalBackground.defaultProps = {
+  children: {},
 };
