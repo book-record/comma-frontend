@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,8 +7,10 @@ import ActiveButton from "../../common/compnents/ActiveButton";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import useIsMount from "../../common/hook/useHook";
-import { getBook } from "../../service/book";
+import { createReview, getBook } from "../../service/book";
 import { getReview } from "../../service/review";
+import { recordSound } from "../../store/recordSlice";
+import Audio from "./components/Audio";
 import BestReview from "./components/BestReview";
 import Review from "./components/Review";
 
@@ -19,8 +21,11 @@ function Book() {
   const [isRecive, setIsRecive] = useState(false);
   const [isClick, setIsClick] = useState(false);
   const [shouldIsShow, setShouldIsShow] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const userId = useSelector((state) => state.login.id);
+  const [isReviewer, setIsReviewer] = useState(false);
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
+  const formData = useSelector((state) => state.record.formData);
 
   const isComponentMounted = useIsMount();
   useEffect(() => {
@@ -40,7 +45,7 @@ function Book() {
     };
 
     callBook();
-  }, [id, isComponentMounted, isClick]);
+  }, [id, isComponentMounted, isClick, shouldIsShow]);
 
   const Header = useMemo(
     () => (
@@ -56,10 +61,10 @@ function Book() {
 
   const handlePushGood = async (e) => {
     if (bestReview._id === e.target.id) {
-      if (bestReview.likes.includes(userId)) {
-        await getReview(e.target.id, userId, false);
+      if (bestReview.likes.includes(user.id)) {
+        await getReview(e.target.id, user.id, false);
       } else {
-        await getReview(e.target.id, userId, true);
+        await getReview(e.target.id, user.id, true);
       }
 
       setIsClick(true);
@@ -68,31 +73,40 @@ function Book() {
 
     book.reviewerHistory.map(async (creator) => {
       if (creator._id === e.target.id) {
-        if (creator.likes.includes(userId)) {
-          await getReview(creator._id, userId, false);
+        if (creator.likes.includes(user.id)) {
+          await getReview(creator._id, user.id, false);
         } else {
-          await getReview(creator._id, userId, true);
+          await getReview(creator._id, user.id, true);
         }
       }
       setIsClick(true);
     });
   };
 
+  // eslint-disable-next-line consistent-return
   const handleOnModal = () => {
     setShouldIsShow(true);
+    dispatch(recordSound({ content: null, formData: null }));
 
-    if (bestReview.id === userId) {
-      return setIsError(true);
+    if (bestReview) {
+      if (bestReview.id === user.id) {
+        return setIsReviewer(true);
+      }
+
+      return book.reviewerHistory.map((creator) =>
+        creator.id === user.id ? setIsReviewer(true) : setIsReviewer(false)
+      );
     }
-
-    return book.reviewerHistory.map((creator) =>
-      creator.id === userId ? setIsError(true) : setIsError(false)
-    );
   };
 
   const handleCloseModal = () => {
     setShouldIsShow(false);
-    setIsError(false);
+    setIsReviewer(false);
+  };
+
+  const handleSubmitReview = async () => {
+    await createReview(id, user.id, formData);
+    setShouldIsShow(false);
   };
 
   return (
@@ -104,7 +118,7 @@ function Book() {
           {isRecive && bestReview && (
             <BestReview
               review={bestReview}
-              userId={userId}
+              userId={user.id}
               onClick={handlePushGood}
             />
           )}
@@ -117,7 +131,7 @@ function Book() {
             <>
               <TopicTitle />
               <ScrollContainer>
-                <Review book={book} userId={userId} onClick={handlePushGood} />
+                <Review book={book} userId={user.id} onClick={handlePushGood} />
               </ScrollContainer>
             </>
           )}
@@ -131,12 +145,22 @@ function Book() {
         />
       </ButtonContainer>
       <ModalBackground
-        onClose={handleCloseModal}
         title="등록하기"
+        onClick={handleSubmitReview}
+        onClose={handleCloseModal}
         show={shouldIsShow}
       >
-        {isError && <div>이미 등록된 유저입니다</div>}
-        {!isError && <div>모달입니다</div>}
+        <RecordWrapper>
+          {isReviewer && <div>이미 등록된 유저입니다</div>}
+          {!isReviewer && (
+            <RecordContent>
+              <h2>20초 이내로 제한 됩니다</h2>
+              <h3>사용자는 책 하나당 하나의 한줄평만 등록이 가능합니다</h3>
+              <h3>녹음 =&gt; 멈추기 =&gt; 저장 순으로 진행해주세요</h3>
+              <Audio />
+            </RecordContent>
+          )}
+        </RecordWrapper>
       </ModalBackground>
     </>
   );
@@ -211,6 +235,20 @@ const TextContent = styled.div`
   width: 95%;
   border-top: 1px solid black;
   padding-top: 10px;
+`;
+
+const RecordWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const RecordContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
 `;
 
 const ButtonContainer = styled.div`

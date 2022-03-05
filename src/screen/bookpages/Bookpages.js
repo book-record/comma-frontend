@@ -85,11 +85,10 @@ function Bookpages() {
         등록하기
       </OnModalButton>
       <ModalBackground
+        show={shouldIsShow}
         onClose={handleCloseModal}
         onClick={handleChooseBook}
         title="등록하기"
-        show={shouldIsShow}
-        setBook={setBook}
       >
         <FindBook
           setBook={setBook}
