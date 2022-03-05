@@ -7,7 +7,7 @@ import ActiveButton from "../../common/compnents/ActiveButton";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import useIsMount from "../../common/hook/useHook";
-import { getBook } from "../../service/book";
+import { createReview, getBook } from "../../service/book";
 import { getReview } from "../../service/review";
 import { recordSound } from "../../store/recordSlice";
 import Audio from "./components/Audio";
@@ -24,7 +24,8 @@ function Book() {
   const [isReviewer, setIsReviewer] = useState(false);
   const dispatch = useDispatch();
 
-  const userId = useSelector((state) => state.login.id);
+  const user = useSelector((state) => state.user);
+  const formData = useSelector((state) => state.record.formData);
 
   const isComponentMounted = useIsMount();
   useEffect(() => {
@@ -44,7 +45,7 @@ function Book() {
     };
 
     callBook();
-  }, [id, isComponentMounted, isClick]);
+  }, [id, isComponentMounted, isClick, shouldIsShow]);
 
   const Header = useMemo(
     () => (
@@ -60,10 +61,10 @@ function Book() {
 
   const handlePushGood = async (e) => {
     if (bestReview._id === e.target.id) {
-      if (bestReview.likes.includes(userId)) {
-        await getReview(e.target.id, userId, false);
+      if (bestReview.likes.includes(user.id)) {
+        await getReview(e.target.id, user.id, false);
       } else {
-        await getReview(e.target.id, userId, true);
+        await getReview(e.target.id, user.id, true);
       }
 
       setIsClick(true);
@@ -72,10 +73,10 @@ function Book() {
 
     book.reviewerHistory.map(async (creator) => {
       if (creator._id === e.target.id) {
-        if (creator.likes.includes(userId)) {
-          await getReview(creator._id, userId, false);
+        if (creator.likes.includes(user.id)) {
+          await getReview(creator._id, user.id, false);
         } else {
-          await getReview(creator._id, userId, true);
+          await getReview(creator._id, user.id, true);
         }
       }
       setIsClick(true);
@@ -85,15 +86,15 @@ function Book() {
   // eslint-disable-next-line consistent-return
   const handleOnModal = () => {
     setShouldIsShow(true);
-    dispatch(recordSound({ content: null, formData: {} }));
+    dispatch(recordSound({ content: null, formData: null }));
 
     if (bestReview) {
-      if (bestReview.id === userId) {
+      if (bestReview.id === user.id) {
         return setIsReviewer(true);
       }
 
       return book.reviewerHistory.map((creator) =>
-        creator.id === userId ? setIsReviewer(true) : setIsReviewer(false)
+        creator.id === user.id ? setIsReviewer(true) : setIsReviewer(false)
       );
     }
   };
@@ -103,7 +104,10 @@ function Book() {
     setIsReviewer(false);
   };
 
-  const handleSubmitReview = () => {};
+  const handleSubmitReview = async () => {
+    await createReview(id, user.id, formData);
+    setShouldIsShow(false);
+  };
 
   return (
     <>
@@ -114,7 +118,7 @@ function Book() {
           {isRecive && bestReview && (
             <BestReview
               review={bestReview}
-              userId={userId}
+              userId={user.id}
               onClick={handlePushGood}
             />
           )}
@@ -127,7 +131,7 @@ function Book() {
             <>
               <TopicTitle />
               <ScrollContainer>
-                <Review book={book} userId={userId} onClick={handlePushGood} />
+                <Review book={book} userId={user.id} onClick={handlePushGood} />
               </ScrollContainer>
             </>
           )}

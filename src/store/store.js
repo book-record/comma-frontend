@@ -5,7 +5,7 @@ import userRouter from "./userSlice";
 
 const store = configureStore({
   reducer: {
-    login: userRouter,
+    user: userRouter,
     record: recordRouter,
   },
   middleware: (getDefaultMiddleware) =>

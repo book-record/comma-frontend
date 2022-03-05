@@ -90,13 +90,13 @@ function Audio() {
 
     const recordFile = {
       content: URL.createObjectURL(audioUrl),
-      formData: recordedAudio,
+      data: formData,
     };
     dispatch(recordSound(recordFile));
   }, [audioUrl, dispatch]);
 
   const handleResetAudioFile = () => {
-    dispatch(recordSound({ content: null, formData: {} }));
+    dispatch(recordSound({ content: null, formData: null }));
   };
 
   return (

@@ -45,3 +45,20 @@ export const getBook = async (id) => {
     return error;
   }
 };
+
+export const createReview = async (id, userId, formData) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/book/${id}/${userId}`,
+      formData,
+      {
+        header: { "content-type": "multipart/form-data" },
+        withCredentials: true,
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

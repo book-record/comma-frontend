@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   content: null,
-  recordFile: {},
+  formData: null,
 };
 
 export const recordSlice = createSlice({
@@ -10,9 +10,9 @@ export const recordSlice = createSlice({
   initialState,
   reducers: {
     recordSound: (state, action) => {
-      const { content, recordedAudio } = action.payload;
+      const { content, data } = action.payload;
       state.content = content;
-      state.recordFile = recordedAudio;
+      state.formData = data;
     },
   },
 });
