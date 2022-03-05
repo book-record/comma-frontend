@@ -116,7 +116,9 @@ function Book() {
           {isRecive && (
             <>
               <TopicTitle />
-              <Review book={book} userId={userId} onClick={handlePushGood} />
+              <ScrollContainer>
+                <Review book={book} userId={userId} onClick={handlePushGood} />
+              </ScrollContainer>
             </>
           )}
         </TextFrame>
@@ -195,6 +197,11 @@ const TextAuthor = styled.div`
   color: #da6d58;
   margin: 20px 0 10px 0;
   width: 90%;
+`;
+
+const ScrollContainer = styled.div`
+  height: 280px;
+  overflow-y: scroll;
 `;
 
 const TextContent = styled.div`
