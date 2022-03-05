@@ -24,7 +24,7 @@ const StyledLink = styled(Link)`
   box-sizing: border-box;
   padding: 4px 8px;
   text-align: center;
-  color: white;
+  color: #fff;
   font-size: 30px;
   text-decoration: none;
   font-family: "Nanum Gothic Coding", monospace;

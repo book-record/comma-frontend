@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-function BookList({ posts }) {
+function BookList({ posts, onClick }) {
   return (
     <BookListContainer>
       {posts.map((post) => (
-        <BookFrame key={post._id} type="button">
-          <Image src={post.imageUrl} alt={posts.bookTitle} />
-          <BookTitle>{post.bookTitle}</BookTitle>
+        <BookFrame id={post._id} key={post._id} type="button" onClick={onClick}>
+          <img id={post._id} src={post.imageUrl} alt={posts.bookTitle} />
+          <p id={post._id}>{post.bookTitle}</p>
         </BookFrame>
       ))}
     </BookListContainer>
@@ -24,25 +24,25 @@ const BookListContainer = styled.ul`
 `;
 
 const BookFrame = styled.button`
+  position: relative;
   margin: 0 auto;
   width: 250px;
-  background-color: white;
+  background-color: #fff;
   border-radius: 2px 20px 20px 2px;
   box-shadow: 2px 1px 3px gray;
-`;
-
-const Image = styled.img`
-  width: 150px;
-  height: 200px;
-`;
-
-const BookTitle = styled.p`
-  font-family: "Nanum Myeongjo", serif;
-  font-size: 12px;
+  img {
+    width: 150px;
+    height: 200px;
+  }
+  p {
+    font-family: "Nanum Myeongjo", serif;
+    font-size: 12px;
+  }
 `;
 
 export default BookList;
 
 BookList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.arrayOf).isRequired,
+  onClick: PropTypes.func.isRequired,
 };

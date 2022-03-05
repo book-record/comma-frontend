@@ -22,6 +22,7 @@ function ModalBackground({ show, onClose, onClick, children, title }) {
 }
 
 const ModalBack = styled.div`
+  z-index: 100;
   position: fixed;
   left: 0;
   top: 0;

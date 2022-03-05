@@ -19,7 +19,7 @@ ReactDOM.render(
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
           <Route path="/bookList" element={<Bookpages />} />
-          <Route path="/book:id" element={<Book />} />
+          <Route path="/book/:id" element={<Book />} />
         </Routes>
       </BrowserRouter>
     </Provider>

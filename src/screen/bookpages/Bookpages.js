@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import noImage from "../../assets/noImage.png";
@@ -18,6 +19,7 @@ function Bookpages() {
   const [isChoice, setIsChoice] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  const navigate = useNavigate();
   useEffect(() => {
     const callBookList = async () => {
       try {
@@ -30,7 +32,7 @@ function Bookpages() {
     };
 
     callBookList();
-  }, [pageNumber]);
+  }, [pageNumber, shouldIsShow]);
 
   const handleOnModal = () => {
     setBook([]);
@@ -58,6 +60,10 @@ function Bookpages() {
 
   const handleCloseModal = () => {
     setShouldIsShow(false);
+  };
+
+  const handlechooseBook = (e) => {
+    navigate(`/book/${e.target.id}`);
   };
 
   const Header = useMemo(
@@ -114,7 +120,7 @@ function Bookpages() {
           )}
         </TextFrame>
       </ModalBackground>
-      <BookList posts={posts} />
+      <BookList posts={posts} onClick={handlechooseBook} />
       <footer>
         <PageNation
           setPageNumber={setPageNumber}
