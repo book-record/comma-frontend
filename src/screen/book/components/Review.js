@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 
 function Review({ book, userId, onClick }) {
-  return book.reviewerHistory?.map((reviewer, i) => (
+  return book.reviewHistory?.map((reviewer, i) => (
     <ReviewContainer key={reviewer._id}>
       <div>{i + 2}번째</div>
       <audio controls>

@@ -8,7 +8,7 @@ function BestReview({ review, userId, onClick }) {
       <h2>최고의 한줄평</h2>
       <audio controls>
         <track kind="captions" />
-        <source src={review.content} />
+        <source src={review.sound} />
       </audio>
       <UserInfo>
         <p>{review.nickname}</p>

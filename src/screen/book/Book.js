@@ -32,9 +32,9 @@ function Book() {
     const callBook = async () => {
       try {
         const data = await getBook(id);
-        data.reviewerHistory.sort((a, b) => b.likes.length - a.likes.length);
+        data.reviewHistory.sort((a, b) => b.likes.length - a.likes.length);
         if (isComponentMounted.current) {
-          setBestReview(data.reviewerHistory.shift());
+          setBestReview(data.reviewHistory.shift());
           setBook(data);
           setIsRecive(true);
           setIsClick(false);
@@ -71,7 +71,7 @@ function Book() {
       return;
     }
 
-    book.reviewerHistory.map(async (creator) => {
+    book.reviewHistory.map(async (creator) => {
       if (creator._id === e.target.id) {
         if (creator.likes.includes(user.id)) {
           await getReview(creator._id, user.id, false);
@@ -87,13 +87,12 @@ function Book() {
   const handleOnModal = () => {
     setShouldIsShow(true);
     dispatch(recordSound({ content: null, formData: null }));
-
     if (bestReview) {
       if (bestReview.id === user.id) {
         return setIsReviewer(true);
       }
 
-      return book.reviewerHistory.map((creator) =>
+      return book.reviewHistory.map((creator) =>
         creator.id === user.id ? setIsReviewer(true) : setIsReviewer(false)
       );
     }
@@ -151,7 +150,7 @@ function Book() {
         show={shouldIsShow}
       >
         <RecordWrapper>
-          {isReviewer && <div>이미 등록된 유저입니다</div>}
+          {isReviewer && <ErrorMessage>이미 등록된 유저입니다</ErrorMessage>}
           {!isReviewer && (
             <RecordContent>
               <h2>20초 이내로 제한 됩니다</h2>
@@ -256,6 +255,13 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+`;
+
+const ErrorMessage = styled.div`
+  color: black;
+  font-size: 30px;
+  margin-top: 15px;
+  font-weight: 400;
 `;
 
 export default Book;

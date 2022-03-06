@@ -16,6 +16,7 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
     if (selectedBook.length > 0) {
       handleSelectBook(selectedBook);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBook]);
 
   const handleSelectBook = useCallback(
@@ -86,7 +87,7 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
       }
     }, 500);
     return () => clearTimeout(debounce);
-  }, [text]);
+  }, [handleSearchBook, text]);
 
   const handleTextUpdate = (e) => {
     setText(e.target.value);

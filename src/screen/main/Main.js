@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,12 +7,14 @@ import { Title } from "../../common/constants/FONT";
 
 function Main() {
   const navigate = useNavigate();
+  const id = useSelector((state) => state.user.id);
+
   const handleMoveBookList = () => {
     navigate("/bookList");
   };
 
-  const handleMoveReocrdList = () => {
-    navigate("/record");
+  const handleMoverReportList = () => {
+    navigate(`/reportList/${id}`);
   };
 
   return (
@@ -22,7 +25,7 @@ function Main() {
         </Title>
       </Halfground>
 
-      <Halfground type="button" onClick={handleMoveReocrdList}>
+      <Halfground type="button" onClick={handleMoverReportList}>
         <Title>
           <h2>타임캡슐</h2>
         </Title>

@@ -5,9 +5,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import GlobalStyle from "./common/compnents/style/GlobalStyle";
 import Book from "./screen/book/Book";
-import Bookpages from "./screen/bookpages/Bookpages";
+import BookPages from "./screen/bookPages/Bookpages";
 import Login from "./screen/login/Login";
 import Main from "./screen/main/Main";
+import ReportPages from "./screen/reportPages/ReportPages";
 import store from "./store/store";
 
 ReactDOM.render(
@@ -18,8 +19,9 @@ ReactDOM.render(
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Main />} />
-          <Route path="/bookList" element={<Bookpages />} />
+          <Route path="/bookList" element={<BookPages />} />
           <Route path="/book/:id" element={<Book />} />
+          <Route path="/reportList/:id" element={<ReportPages />} />
         </Routes>
       </BrowserRouter>
     </Provider>
