@@ -42,6 +42,7 @@
     "react/jsx-boolean-value": 0,
     "no-restricted-syntax": [0, "ForOfStatement"],
     "import/no-extraneous-dependencies": 0,
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "caseSensitive": 0
   }
 }

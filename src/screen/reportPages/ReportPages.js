@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import noImage from "../../assets/noImage.png";
 import BookList from "../../common/compnents/BookList";
+import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
@@ -18,6 +20,8 @@ function ReportPages() {
   const [isChoice, setIsChoice] = useState(false);
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [reportTitle, setReportTitle] = useState();
+  const [reportText, setRerpotText] = useState();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,6 +45,11 @@ function ReportPages() {
     setIsError(false);
   };
 
+  const handleSaveReport = async () => {
+    console.log(reportTitle);
+    console.log(reportText);
+  };
+
   const handleCloseModal = () => {
     setShouldIsShow(false);
   };
@@ -51,6 +60,14 @@ function ReportPages() {
     }
     setIsError(true);
     return setShouldIsShow(true);
+  };
+
+  const handleWriteReportTitle = (e) => {
+    setReportTitle(e.target.value);
+  };
+
+  const handleWriteReportText = (e) => {
+    setRerpotText(e.target.value);
   };
 
   const Header = useMemo(
@@ -74,14 +91,19 @@ function ReportPages() {
       <ModalBackground
         show={shouldIsShow}
         onClose={handleCloseModal}
-        onClick={() => {}}
-        title="1년"
+        onClick={handleSaveReport}
+        title="1년 후"
       >
         {isError && (
           <RecordWrapper>
             <div>D-day가 되지 않았습니다 기다려주세요</div>
           </RecordWrapper>
         )}
+        <FindBook
+          setBook={setBook}
+          setIsChoice={setIsChoice}
+          setIsError={setIsError}
+        />
         <ImageFrame>
           {isChoice && (
             <img
@@ -92,12 +114,18 @@ function ReportPages() {
         </ImageFrame>
         <TextFrame>
           {isChoice && (
-            <div>
-              <div />
-              <TextTitle>{book[0].title}</TextTitle>
-              <TextAuthor>저자: {book[0].authors}</TextAuthor>
-              <TextContent>{book[0].contents}</TextContent>
-            </div>
+            <>
+              <input
+                placeholder="제목을 입력하세요"
+                type="text"
+                onChange={handleWriteReportTitle}
+              />
+              <input
+                placeholder="본문을 입력하세요"
+                type="text"
+                onChange={handleWriteReportText}
+              />
+            </>
           )}
         </TextFrame>
       </ModalBackground>
@@ -142,31 +170,6 @@ const ImageFrame = styled.div`
 const TextFrame = styled.div`
   width: 50%;
   height: 400px;
-`;
-
-const TextTitle = styled.div`
-  margin-top: 10px;
-  font-size: 20px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-`;
-
-const TextAuthor = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  color: #da6d58;
-  margin: 20px 0 10px 0;
-  width: 90%;
-`;
-
-const TextContent = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  width: 95%;
-  border-top: 1px solid black;
-  padding-top: 10px;
 `;
 
 const RecordWrapper = styled.div`
