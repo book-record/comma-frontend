@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import noImage from "../../assets/noImage.png";
@@ -8,34 +7,32 @@ import BookList from "../../common/compnents/BookList";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
-import { createBook, getBookList } from "../../service/book";
-import FindBook from "./components/FindBook";
+import { getReportList } from "../../service/report";
 
-function BookPages() {
+function ReportPages() {
+  const { id } = useParams();
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
   const [book, setBook] = useState([]);
-  const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isChoice, setIsChoice] = useState(false);
+  const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const navigate = useNavigate();
-  const id = useSelector((state) => state.user.id);
-  const address = `/reportList/${id}`;
   useEffect(() => {
-    const callBookList = async () => {
+    const callReportList = async () => {
       try {
-        const { totalPage, bookList } = await getBookList(pageNumber);
-        setPosts(bookList);
+        const { totalPage, reportList } = await getReportList(pageNumber, id);
+        setPosts(reportList);
         setNumberOfPages(totalPage);
       } catch (error) {
-        throw new Error("책 리스트를 불러오지 못했습니다");
+        throw new Error("독후감을 불러오지 못했습니다");
       }
     };
 
-    callBookList();
-  }, [pageNumber, shouldIsShow]);
+    callReportList();
+  }, [id, pageNumber, shouldIsShow]);
 
   const handleOnModal = () => {
     setBook([]);
@@ -44,29 +41,16 @@ function BookPages() {
     setIsError(false);
   };
 
-  const handleChooseBook = async () => {
-    if (!book[0].thumbnail) {
-      book[0].thumbnail = noImage;
-    }
-
-    if (!book[0].contents) {
-      book[0].contents = "줄거리가 존재하지 않습니다";
-    }
-    const result = await createBook(book[0]);
-
-    if (result === "ok") {
-      setShouldIsShow(false);
-      return;
-    }
-    setIsError(true);
-  };
-
   const handleCloseModal = () => {
     setShouldIsShow(false);
   };
 
-  const handlechooseBook = (e) => {
-    navigate(`/book/${e.currentTarget.id}`);
+  const handleChooseReport = (e) => {
+    if (e.currentTarget.dataset.day === "D-day") {
+      return navigate(`/report/${e.currentTarget.id}`);
+    }
+    setIsError(true);
+    return setShouldIsShow(true);
   };
 
   const Header = useMemo(
@@ -74,33 +58,33 @@ function BookPages() {
       <LinkHeader
         firstLink="/"
         firstTitle="쉼표"
-        secondLink={address}
-        secondTitle="타임캡슐"
+        secondLink="/bookList"
+        secondTitle="한줄평"
       />
     ),
-    [address]
+    []
   );
 
   return (
     <Background>
       {Header}
       <OnModalButton type="button" onClick={handleOnModal}>
-        등록하기
+        보내기
       </OnModalButton>
       <ModalBackground
         show={shouldIsShow}
         onClose={handleCloseModal}
-        onClick={handleChooseBook}
-        title="등록하기"
+        onClick={() => {}}
+        title="1년"
       >
-        <FindBook
-          setBook={setBook}
-          setIsChoice={setIsChoice}
-          setIsError={setIsError}
-        />
+        {isError && (
+          <RecordWrapper>
+            <div>D-day가 되지 않았습니다 기다려주세요</div>
+          </RecordWrapper>
+        )}
         <ImageFrame>
           {isChoice && (
-            <ModalBookImage
+            <img
               src={book[0].thumbnail ? book[0].thumbnail : noImage}
               alt={book[0].title}
             />
@@ -115,14 +99,9 @@ function BookPages() {
               <TextContent>{book[0].contents}</TextContent>
             </div>
           )}
-          {isError && (
-            <ErrorMessage>
-              이미 존재하는 책입니다 다른 책을 입력해주세요
-            </ErrorMessage>
-          )}
         </TextFrame>
       </ModalBackground>
-      <BookList posts={posts} onClick={handlechooseBook} />
+      <BookList posts={posts} onClick={handleChooseReport} />
       <footer>
         <PageNation
           setPageNumber={setPageNumber}
@@ -133,7 +112,6 @@ function BookPages() {
     </Background>
   );
 }
-
 const Background = styled.div`
   margin: 0;
   padding: 0;
@@ -156,6 +134,9 @@ const ImageFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  img {
+    width: 45%;
+  }
 `;
 
 const TextFrame = styled.div`
@@ -188,14 +169,18 @@ const TextContent = styled.div`
   padding-top: 10px;
 `;
 
-const ModalBookImage = styled.img`
-  width: 45%;
+const RecordWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  div {
+    color: black;
+    font-size: 30px;
+    margin-top: 15px;
+    font-weight: 400;
+  }
 `;
 
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 25px;
-  margin-top: 15px;
-`;
-
-export default BookPages;
+export default ReportPages;
