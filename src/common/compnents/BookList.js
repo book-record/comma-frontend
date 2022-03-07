@@ -59,18 +59,23 @@ const BookFrame = styled.div`
   position: relative;
   margin: 0 auto;
   text-align: center;
-  width: 220px;
+  width: 230px;
   background-color: #fff;
   border-radius: 2px 20px 20px 2px;
-  box-shadow: 5px 2px 3px 3px gray;
+  box-shadow: 3px 2px 3px 3px #e0e0e0;
   img {
-    margin-top: 3px;
+    margin-top: 5px;
     width: 150px;
     height: 200px;
   }
   p {
     font-family: "Nanum Myeongjo", serif;
     font-size: 12px;
+  }
+  &:hover {
+    background: #eceff1;
+    cursor: pointer;
+    transform: translateY(-4px);
   }
 `;
 
