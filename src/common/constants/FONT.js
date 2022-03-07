@@ -15,7 +15,7 @@ export const Title = styled.div`
 
   & h2 {
     font-family: "Nanum Gothic Coding", monospace;
-    font-size: 80px;
+    font-size: 100px;
     color: white;
     font-weight: 700;
   }

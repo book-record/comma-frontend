@@ -70,14 +70,7 @@ function BookPages() {
   };
 
   const Header = useMemo(
-    () => (
-      <LinkHeader
-        firstLink="/"
-        firstTitle="쉼표"
-        secondLink={address}
-        secondTitle="타임캡슐"
-      />
-    ),
+    () => <LinkHeader link={address} title="타임캡슐" />,
     [address]
   );
 

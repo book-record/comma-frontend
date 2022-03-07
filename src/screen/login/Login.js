@@ -36,7 +36,7 @@ function Login() {
 
 const BackGround = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   align-content: center;
   justify-content: center;
   flex-direction: column;
@@ -60,6 +60,9 @@ const GoogleButton = styled.button`
   margin-top: 180px;
   border: none;
   background: none;
+  img {
+    width: 250px;
+  }
 `;
 
 export default Login;

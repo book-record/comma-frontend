@@ -26,6 +26,7 @@ function Book() {
 
   const user = useSelector((state) => state.user);
   const formData = useSelector((state) => state.record.formData);
+  const address = `/reportList/${user.id}`;
 
   const isComponentMounted = useIsMount();
   useEffect(() => {
@@ -48,15 +49,8 @@ function Book() {
   }, [id, isComponentMounted, isClick, shouldIsShow]);
 
   const Header = useMemo(
-    () => (
-      <LinkHeader
-        firstLink="/"
-        firstTitle="쉼표"
-        secondLink="/record"
-        secondTitle="타임캡슐"
-      />
-    ),
-    []
+    () => <LinkHeader link={address} title="타임캡슐" />,
+    [address]
   );
 
   const handlePushGood = async (e) => {
@@ -134,15 +128,15 @@ function Book() {
               </ScrollContainer>
             </>
           )}
+          <ButtonContainer>
+            <ActiveButton
+              onClick={handleOnModal}
+              disabled={false}
+              title="등록하기"
+            />
+          </ButtonContainer>
         </TextFrame>
       </Content>
-      <ButtonContainer>
-        <ActiveButton
-          onClick={handleOnModal}
-          disabled={false}
-          title="등록하기"
-        />
-      </ButtonContainer>
       <ModalBackground
         title="등록하기"
         onClick={handleSubmitReview}
@@ -167,35 +161,25 @@ function Book() {
 
 const Content = styled.div`
   display: flex;
-  margin: 0;
-  padding: 0;
-  top: 0;
-  left: 0;
-  width: 90%;
-  height: 100%;
-  margin: 50px 0;
+  justify-content: center;
+  height: 90vh;
 `;
 
 const ImageFrame = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
   justify-content: center;
   align-items: center;
   img {
     width: 180px;
   }
-  div {
-    text-align: center;
-  }
-  p {
-    font-size: 20px;
-  }
 `;
 
 const TextFrame = styled.div`
-  width: 50%;
-  height: 400px;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin: 100px 20px 0 20px;
 `;
 
 const TextTitle = styled.div`
@@ -208,9 +192,16 @@ const TopicTitle = styled.div`
   display: flex;
   border-top: 1px solid black;
   margin: 15px 0;
-  padding-top: 12px;
+  padding-top: 10px;
   justify-content: space-between;
-  width: 95%;
+`;
+
+const TextContent = styled.div`
+  font-size: 15px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  border-top: 1px solid black;
+  padding-top: 10px;
 `;
 
 const TextAuthor = styled.div`
@@ -218,22 +209,14 @@ const TextAuthor = styled.div`
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
   color: #da6d58;
-  margin: 20px 0 10px 0;
+  margin: 0px 0 10px 0;
   width: 90%;
 `;
 
 const ScrollContainer = styled.div`
-  height: 280px;
+  height: 230px;
   overflow-y: scroll;
-`;
-
-const TextContent = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  width: 95%;
-  border-top: 1px solid black;
-  padding-top: 10px;
+  margin-top: 80px;
 `;
 
 const RecordWrapper = styled.div`
@@ -251,7 +234,6 @@ const RecordContent = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 90%;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;

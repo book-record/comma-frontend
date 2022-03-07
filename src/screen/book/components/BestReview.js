@@ -32,9 +32,9 @@ const BackGround = styled.div`
   text-align: center;
   top: 0;
   left: 0;
-  margin-top: 35px;
   padding: 20px;
-  background: #e19894;
+  margin-top: 30px;
+  background: #eeeeee;
   audio {
     width: 280px;
     height: 30px;

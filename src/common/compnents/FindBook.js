@@ -27,8 +27,8 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
         page: 1,
         size: 1,
       };
-      const { data } = await bookSearch(params);
 
+      const { data } = await bookSearch(params);
       const result = data.documents.filter((book) =>
         book.title.includes(choicedBook.current)
       );
