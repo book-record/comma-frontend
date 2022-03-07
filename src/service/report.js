@@ -28,3 +28,16 @@ export const createRport = async (list) => {
     throw new Error("독후감을 등록하지 못했습니다");
   }
 };
+
+export const getReport = async (id) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/report/${id}`,
+      { withCredentials: true }
+    );
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+};

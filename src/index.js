@@ -8,6 +8,7 @@ import Book from "./screen/book/Book";
 import BookPages from "./screen/bookPages/BookPages";
 import Login from "./screen/login/Login";
 import Main from "./screen/main/Main";
+import Report from "./screen/report/Report";
 import ReportPages from "./screen/reportPages/ReportPages";
 import store from "./store/store";
 
@@ -21,7 +22,8 @@ ReactDOM.render(
           <Route path="/" element={<Main />} />
           <Route path="/bookList" element={<BookPages />} />
           <Route path="/book/:id" element={<Book />} />
-          <Route path="/reportList/:id" element={<ReportPages />} />
+          <Route path="/reportList/:userId" element={<ReportPages />} />
+          <Route path="/report/:id" element={<Report />} />
         </Routes>
       </BrowserRouter>
     </Provider>

@@ -15,7 +15,7 @@ import Text from "./components/Text";
 import Title from "./components/Title";
 
 function ReportPages() {
-  const { id } = useParams();
+  const { userId } = useParams();
   const [pageNumber, setPageNumber] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [posts, setPosts] = useState([]);
@@ -32,7 +32,10 @@ function ReportPages() {
   useEffect(() => {
     const callReportList = async () => {
       try {
-        const { totalPage, reportList } = await getReportList(pageNumber, id);
+        const { totalPage, reportList } = await getReportList(
+          pageNumber,
+          userId
+        );
         setPosts(reportList);
         setNumberOfPages(totalPage);
       } catch (error) {
@@ -41,7 +44,7 @@ function ReportPages() {
     };
 
     callReportList();
-  }, [id, pageNumber, shouldIsShow]);
+  }, [userId, pageNumber, shouldIsShow]);
 
   const handleOnModal = () => {
     setBook([]);
@@ -54,7 +57,7 @@ function ReportPages() {
 
   const handleSaveReport = async () => {
     const list = {
-      id,
+      id: userId,
       bookTitle: book[0].title,
       imageUrl: book[0].thumbnail,
       title: reportTitle,
@@ -88,14 +91,7 @@ function ReportPages() {
   };
 
   const Header = useMemo(
-    () => (
-      <LinkHeader
-        firstLink="/"
-        firstTitle="쉼표"
-        secondLink="/bookList"
-        secondTitle="한줄평"
-      />
-    ),
+    () => <LinkHeader link="/bookList" title="한줄평" />,
     []
   );
 

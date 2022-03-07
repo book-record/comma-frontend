@@ -3,15 +3,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function LinkHeader({ firstLink, firstTitle, secondLink, secondTitle }) {
+function LinkHeader({ link, title }) {
   const handleLogout = () => {
     localStorage.clear();
   };
   return (
     <Header>
-      <StyledLink to={firstLink}>{firstTitle}</StyledLink>
+      <StyledLink to="/">쉼표</StyledLink>
       <div>
-        <StyledLink to={secondLink}>{secondTitle}</StyledLink>
+        <StyledLink to={link}>{title}</StyledLink>
         <LogoutButton type="button" onClick={handleLogout}>
           <StyledLink to="/login">로그아웃</StyledLink>
         </LogoutButton>
@@ -38,7 +38,6 @@ const Header = styled.div`
   left: 0;
   align-items: center;
   height: 60px;
-  width: 100%;
   background: #e19894;
 `;
 
@@ -50,8 +49,6 @@ const LogoutButton = styled.button`
 export default LinkHeader;
 
 LinkHeader.propTypes = {
-  firstLink: PropTypes.string.isRequired,
-  firstTitle: PropTypes.string.isRequired,
-  secondLink: PropTypes.string.isRequired,
-  secondTitle: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
