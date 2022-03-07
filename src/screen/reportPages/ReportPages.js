@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import dayjs from "dayjs";
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,7 +10,9 @@ import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
-import { getReportList } from "../../service/report";
+import { getReportList, createRport } from "../../service/report";
+import Text from "./components/Text";
+import Title from "./components/Title";
 
 function ReportPages() {
   const { id } = useParams();
@@ -20,10 +23,12 @@ function ReportPages() {
   const [isChoice, setIsChoice] = useState(false);
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [reportTitle, setReportTitle] = useState();
-  const [reportText, setRerpotText] = useState();
+  const [reportTitle, setReportTitle] = useState("");
+  const [reportText, setRerpotText] = useState("");
 
+  const textValue = 500 - reportText.length;
   const navigate = useNavigate();
+
   useEffect(() => {
     const callReportList = async () => {
       try {
@@ -43,11 +48,23 @@ function ReportPages() {
     setIsChoice(false);
     setShouldIsShow(true);
     setIsError(false);
+    setReportTitle("");
+    setRerpotText("");
   };
 
   const handleSaveReport = async () => {
-    console.log(reportTitle);
-    console.log(reportText);
+    const list = {
+      id,
+      bookTitle: book[0].title,
+      imageUrl: book[0].thumbnail,
+      title: reportTitle,
+      text: reportText,
+      startDate: new Date().toISOString(),
+      finishDate: dayjs(new Date()).add(1, "y").toISOString(),
+    };
+
+    await createRport(list);
+    setShouldIsShow(false);
   };
 
   const handleCloseModal = () => {
@@ -88,47 +105,47 @@ function ReportPages() {
       <OnModalButton type="button" onClick={handleOnModal}>
         보내기
       </OnModalButton>
-      <ModalBackground
-        show={shouldIsShow}
-        onClose={handleCloseModal}
-        onClick={handleSaveReport}
-        title="1년 후"
-      >
-        {isError && (
+      {isError && (
+        <ModalBackground show={shouldIsShow} onClose={handleCloseModal}>
           <RecordWrapper>
             <div>D-day가 되지 않았습니다 기다려주세요</div>
           </RecordWrapper>
-        )}
-        <FindBook
-          setBook={setBook}
-          setIsChoice={setIsChoice}
-          setIsError={setIsError}
-        />
-        <ImageFrame>
-          {isChoice && (
-            <img
-              src={book[0].thumbnail ? book[0].thumbnail : noImage}
-              alt={book[0].title}
-            />
-          )}
-        </ImageFrame>
-        <TextFrame>
-          {isChoice && (
-            <>
-              <input
-                placeholder="제목을 입력하세요"
-                type="text"
-                onChange={handleWriteReportTitle}
+        </ModalBackground>
+      )}
+      {!isError && (
+        <ModalBackground
+          show={shouldIsShow}
+          onClose={handleCloseModal}
+          onClick={handleSaveReport}
+          title="1년 후"
+        >
+          <FindBook
+            setBook={setBook}
+            setIsChoice={setIsChoice}
+            setIsError={setIsError}
+          />
+          <ImageFrame>
+            {isChoice && (
+              <img
+                src={book[0].thumbnail ? book[0].thumbnail : noImage}
+                alt={book[0].title}
               />
-              <input
-                placeholder="본문을 입력하세요"
-                type="text"
-                onChange={handleWriteReportText}
-              />
-            </>
-          )}
-        </TextFrame>
-      </ModalBackground>
+            )}
+          </ImageFrame>
+          <TextFrame>
+            {isChoice && (
+              <>
+                <Title title={reportTitle} onChange={handleWriteReportTitle} />
+                <Text text={reportText} onChange={handleWriteReportText} />
+                <div>
+                  남은 글자 수 :
+                  <input type="text" readOnly value={textValue} />
+                </div>
+              </>
+            )}
+          </TextFrame>
+        </ModalBackground>
+      )}
       <BookList posts={posts} onClick={handleChooseReport} />
       <footer>
         <PageNation
@@ -168,8 +185,20 @@ const ImageFrame = styled.div`
 `;
 
 const TextFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
   width: 50%;
-  height: 400px;
+  height: 450px;
+  div {
+    margin-top: 20px;
+    input {
+      width: 60px;
+      text-align: center;
+      border: none;
+    }
+  }
 `;
 
 const RecordWrapper = styled.div`

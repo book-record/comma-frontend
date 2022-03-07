@@ -14,7 +14,9 @@ function ModalBackground({ show, onClose, onClick, children, title }) {
         <ModalContent>{children}</ModalContent>
         <ButtonContainer>
           <ActiveButton onClick={onClose} disabled={false} title="닫기" />
-          <ActiveButton onClick={onClick} disabled={false} title={title} />
+          {title && (
+            <ActiveButton onClick={onClick} disabled={false} title={title} />
+          )}
         </ButtonContainer>
       </ModalInside>
     </ModalBack>
@@ -68,11 +70,13 @@ export default ModalBackground;
 ModalBackground.propTypes = {
   show: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
   children: PropTypes.node,
 };
 
 ModalBackground.defaultProps = {
+  onClick: "",
+  title: "",
   children: {},
 };

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import GlobalStyle from "./common/compnents/style/GlobalStyle";
 import Book from "./screen/book/Book";
-import BookPages from "./screen/bookPages/Bookpages";
+import BookPages from "./screen/bookPages/BookPages";
 import Login from "./screen/login/Login";
 import Main from "./screen/main/Main";
 import ReportPages from "./screen/reportPages/ReportPages";
