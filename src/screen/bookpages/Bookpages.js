@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 import noImage from "../../assets/noImage.png";
 import BookList from "../../common/compnents/BookList";
+import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
 import { createBook, getBookList } from "../../service/book";
-import FindBook from "./components/FindBook";
 
 function BookPages() {
   const [pageNumber, setPageNumber] = useState(0);
@@ -100,7 +100,7 @@ function BookPages() {
         />
         <ImageFrame>
           {isChoice && (
-            <ModalBookImage
+            <img
               src={book[0].thumbnail ? book[0].thumbnail : noImage}
               alt={book[0].title}
             />
@@ -108,12 +108,12 @@ function BookPages() {
         </ImageFrame>
         <TextFrame>
           {isChoice && (
-            <div>
+            <>
               <div />
               <TextTitle>{book[0].title}</TextTitle>
               <TextAuthor>저자: {book[0].authors}</TextAuthor>
               <TextContent>{book[0].contents}</TextContent>
-            </div>
+            </>
           )}
           {isError && (
             <ErrorMessage>
@@ -156,6 +156,9 @@ const ImageFrame = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  img {
+    width: 45%;
+  }
 `;
 
 const TextFrame = styled.div`
@@ -186,10 +189,6 @@ const TextContent = styled.div`
   width: 95%;
   border-top: 1px solid black;
   padding-top: 10px;
-`;
-
-const ModalBookImage = styled.img`
-  width: 45%;
 `;
 
 const ErrorMessage = styled.div`

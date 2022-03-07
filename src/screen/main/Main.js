@@ -8,7 +8,6 @@ import { Title } from "../../common/constants/FONT";
 function Main() {
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
-
   const handleMoveBookList = () => {
     navigate("/bookList");
   };

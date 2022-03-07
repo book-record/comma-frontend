@@ -1,13 +1,18 @@
+/* eslint-disable no-console */
+import dayjs from "dayjs";
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import noImage from "../../assets/noImage.png";
 import BookList from "../../common/compnents/BookList";
+import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
-import { getReportList } from "../../service/report";
+import { getReportList, createRport } from "../../service/report";
+import Text from "./components/Text";
+import Title from "./components/Title";
 
 function ReportPages() {
   const { id } = useParams();
@@ -18,8 +23,12 @@ function ReportPages() {
   const [isChoice, setIsChoice] = useState(false);
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [reportTitle, setReportTitle] = useState("");
+  const [reportText, setRerpotText] = useState("");
 
+  const textValue = 500 - reportText.length;
   const navigate = useNavigate();
+
   useEffect(() => {
     const callReportList = async () => {
       try {
@@ -39,6 +48,23 @@ function ReportPages() {
     setIsChoice(false);
     setShouldIsShow(true);
     setIsError(false);
+    setReportTitle("");
+    setRerpotText("");
+  };
+
+  const handleSaveReport = async () => {
+    const list = {
+      id,
+      bookTitle: book[0].title,
+      imageUrl: book[0].thumbnail,
+      title: reportTitle,
+      text: reportText,
+      startDate: new Date().toISOString(),
+      finishDate: dayjs(new Date()).add(1, "y").toISOString(),
+    };
+
+    await createRport(list);
+    setShouldIsShow(false);
   };
 
   const handleCloseModal = () => {
@@ -51,6 +77,14 @@ function ReportPages() {
     }
     setIsError(true);
     return setShouldIsShow(true);
+  };
+
+  const handleWriteReportTitle = (e) => {
+    setReportTitle(e.target.value);
+  };
+
+  const handleWriteReportText = (e) => {
+    setRerpotText(e.target.value);
   };
 
   const Header = useMemo(
@@ -71,36 +105,47 @@ function ReportPages() {
       <OnModalButton type="button" onClick={handleOnModal}>
         보내기
       </OnModalButton>
-      <ModalBackground
-        show={shouldIsShow}
-        onClose={handleCloseModal}
-        onClick={() => {}}
-        title="1년"
-      >
-        {isError && (
+      {isError && (
+        <ModalBackground show={shouldIsShow} onClose={handleCloseModal}>
           <RecordWrapper>
             <div>D-day가 되지 않았습니다 기다려주세요</div>
           </RecordWrapper>
-        )}
-        <ImageFrame>
-          {isChoice && (
-            <img
-              src={book[0].thumbnail ? book[0].thumbnail : noImage}
-              alt={book[0].title}
-            />
-          )}
-        </ImageFrame>
-        <TextFrame>
-          {isChoice && (
-            <div>
-              <div />
-              <TextTitle>{book[0].title}</TextTitle>
-              <TextAuthor>저자: {book[0].authors}</TextAuthor>
-              <TextContent>{book[0].contents}</TextContent>
-            </div>
-          )}
-        </TextFrame>
-      </ModalBackground>
+        </ModalBackground>
+      )}
+      {!isError && (
+        <ModalBackground
+          show={shouldIsShow}
+          onClose={handleCloseModal}
+          onClick={handleSaveReport}
+          title="1년 후"
+        >
+          <FindBook
+            setBook={setBook}
+            setIsChoice={setIsChoice}
+            setIsError={setIsError}
+          />
+          <ImageFrame>
+            {isChoice && (
+              <img
+                src={book[0].thumbnail ? book[0].thumbnail : noImage}
+                alt={book[0].title}
+              />
+            )}
+          </ImageFrame>
+          <TextFrame>
+            {isChoice && (
+              <>
+                <Title title={reportTitle} onChange={handleWriteReportTitle} />
+                <Text text={reportText} onChange={handleWriteReportText} />
+                <div>
+                  남은 글자 수 :
+                  <input type="text" readOnly value={textValue} />
+                </div>
+              </>
+            )}
+          </TextFrame>
+        </ModalBackground>
+      )}
       <BookList posts={posts} onClick={handleChooseReport} />
       <footer>
         <PageNation
@@ -140,33 +185,20 @@ const ImageFrame = styled.div`
 `;
 
 const TextFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
   width: 50%;
-  height: 400px;
-`;
-
-const TextTitle = styled.div`
-  margin-top: 10px;
-  font-size: 20px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-`;
-
-const TextAuthor = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  color: #da6d58;
-  margin: 20px 0 10px 0;
-  width: 90%;
-`;
-
-const TextContent = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  width: 95%;
-  border-top: 1px solid black;
-  padding-top: 10px;
+  height: 450px;
+  div {
+    margin-top: 20px;
+    input {
+      width: 60px;
+      text-align: center;
+      border: none;
+    }
+  }
 `;
 
 const RecordWrapper = styled.div`

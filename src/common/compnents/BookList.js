@@ -7,26 +7,26 @@ function BookList({ posts, onClick }) {
   return (
     <BookListContainer>
       {posts?.map((post) => {
-        const dDay = dayjs(post.dDay);
+        const finishDate = dayjs(post.finishDate);
+        const now = dayjs(new Date());
 
-        const validateDate = (day) => {
-          const now = dayjs(new Date());
-          if (day.diff(now, "d") > 1) {
-            return `D-day ${day.diff(now, "d")}일`;
+        const validateDate = (start, finish) => {
+          if (finish.diff(start, "d") > 1) {
+            return `D-day ${finish.diff(start, "d")}일`;
           }
 
-          if (day.diff(now, "h") > 0) {
-            return `D-day ${day.diff(now, "h")}시간`;
+          if (finish.diff(start, "h") > 0) {
+            return `D-day ${finish.diff(start, "h")}시간`;
           }
 
-          if (day.diff(now, "m") > 1) {
-            return `D-day ${day.diff(now, "m")}분`;
+          if (finish.diff(start, "m") > 1) {
+            return `D-day ${finish.diff(start, "m")}분`;
           }
 
           return "D-day";
         };
 
-        const completeDday = validateDate(dDay);
+        const completeDday = validateDate(now, finishDate);
 
         return (
           <BookFrame
@@ -37,7 +37,7 @@ function BookList({ posts, onClick }) {
           >
             <img src={post.imageUrl} alt={posts.bookTitle} />
             <p>{post.bookTitle}</p>
-            {post.dDay && (
+            {post.finishDate && (
               <DdayText date={completeDday}>{completeDday}</DdayText>
             )}
           </BookFrame>
