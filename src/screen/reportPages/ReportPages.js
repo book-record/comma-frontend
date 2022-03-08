@@ -4,13 +4,13 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { getReportList, createRport } from "../../api/report";
 import noImage from "../../assets/noImage.png";
 import BookList from "../../common/compnents/BookList";
 import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
-import { getReportList, createRport } from "../../service/report";
 import Text from "./components/Text";
 import Title from "./components/Title";
 

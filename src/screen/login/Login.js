@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { firebaseLogin } from "../../api/auth";
 import googleLogo from "../../assets/googleButton.png";
 import { Title } from "../../common/constants/FONT";
-import { firebaseLogin } from "../../service/auth";
 import { signIn } from "../../store/userSlice";
 
 function Login() {

@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import { createBook, getBookList } from "../../api/book";
 import noImage from "../../assets/noImage.png";
 import BookList from "../../common/compnents/BookList";
 import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import PageNation from "../../common/compnents/PageNation";
-import { createBook, getBookList } from "../../service/book";
 
 function BookPages() {
   const [pageNumber, setPageNumber] = useState(0);

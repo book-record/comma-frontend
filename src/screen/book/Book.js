@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { createReview, getBook } from "../../api/book";
+import { getReview } from "../../api/review";
 import ActiveButton from "../../common/compnents/ActiveButton";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import useIsMount from "../../common/hook/useHook";
-import { createReview, getBook } from "../../service/book";
-import { getReview } from "../../service/review";
 import { recordSound } from "../../store/recordSlice";
 import Audio from "./components/Audio";
 import BestReview from "./components/BestReview";

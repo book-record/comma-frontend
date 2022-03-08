@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 
-import isLogined from "../../common/constants/AUTH";
-import { checkUser } from "../../service/auth";
+import { checkUser } from "../../api/auth";
 import { signIn } from "../../store/userSlice";
+import isLogined from "../constants/AUTH";
 
 function RequireAuth() {
   const dispatch = useDispatch();

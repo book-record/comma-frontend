@@ -2,8 +2,8 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { getReport } from "../../api/report";
 import LinkHeader from "../../common/compnents/LinkHeader";
-import { getReport } from "../../service/report";
 
 function Report() {
   const { id } = useParams();
