@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 
+import { bookSearch } from "../../api/bookSearch";
 import noImage from "../../assets/noImage.png";
-import { bookSearch } from "../../service/bookSearch";
 
 function FindBook({ setBook, setIsChoice, setIsError }) {
   const [text, setText] = useState("");
@@ -16,7 +16,6 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
     if (selectedBook.length > 0) {
       handleSelectBook(selectedBook);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBook]);
 
   const handleSelectBook = useCallback(

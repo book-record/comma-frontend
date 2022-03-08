@@ -19,8 +19,29 @@ export const firebaseLogin = async () => {
     );
 
     localStorage.setItem(AUTHORIZATION, `Bearer ${data.token}`);
+
     axios.defaults.headers.common[AUTHORIZATION] =
       localStorage.getItem(AUTHORIZATION);
+
+    return data;
+  } catch (error) {
+    throw new Error("로그인에 실패했습니다");
+  }
+};
+
+export const checkUser = async () => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/auth`,
+      {
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+        },
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     return data;
   } catch (error) {
