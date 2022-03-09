@@ -64,7 +64,6 @@ function Book() {
       } else {
         await getReview(e.target.id, user.id, true);
       }
-
       setIsClick(true);
       return;
     }
