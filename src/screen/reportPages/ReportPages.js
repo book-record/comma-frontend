@@ -36,15 +36,19 @@ function ReportPages() {
           pageNumber,
           userId
         );
+        if (!totalPage || !reportList) {
+          navigate("*", { replace: true });
+          return;
+        }
         setPosts(reportList);
         setNumberOfPages(totalPage);
       } catch (error) {
-        throw new Error("독후감을 불러오지 못했습니다");
+        navigate("*", { replace: true });
       }
     };
 
     callReportList();
-  }, [userId, pageNumber, shouldIsShow]);
+  }, [userId, pageNumber, shouldIsShow, navigate]);
 
   const handleOnModal = () => {
     setBook([]);
@@ -63,7 +67,7 @@ function ReportPages() {
       title: reportTitle,
       text: reportText,
       startDate: new Date().toISOString(),
-      finishDate: dayjs(new Date()).add(1, "y").toISOString(),
+      finishDate: dayjs(new Date()).add(3, "m").toISOString(),
     };
 
     await createRport(list);
@@ -113,7 +117,7 @@ function ReportPages() {
           show={shouldIsShow}
           onClose={handleCloseModal}
           onClick={handleSaveReport}
-          title="1년 후"
+          title="3분 후"
         >
           <FindBook
             setBook={setBook}

@@ -3,30 +3,16 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
+import { validateDate } from "../utils/utilsFunc";
+
 function BookList({ posts, onClick }) {
   return (
     <BookListContainer>
       {posts?.map((post) => {
         const finishDate = dayjs(post.finishDate);
-        const now = dayjs(new Date());
+        const currentDate = dayjs(new Date());
 
-        const validateDate = (start, finish) => {
-          if (finish.diff(start, "d") > 1) {
-            return `D-day ${finish.diff(start, "d")}일`;
-          }
-
-          if (finish.diff(start, "h") > 0) {
-            return `D-day ${finish.diff(start, "h")}시간`;
-          }
-
-          if (finish.diff(start, "m") > 1) {
-            return `D-day ${finish.diff(start, "m")}분`;
-          }
-
-          return "D-day";
-        };
-
-        const completeDday = validateDate(now, finishDate);
+        const completeDday = validateDate(currentDate, finishDate);
 
         return (
           <BookFrame

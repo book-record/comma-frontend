@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { getReport } from "../../api/report";
@@ -9,20 +9,27 @@ function Report() {
   const { id } = useParams();
   const [report, setReport] = useState([]);
   const [isOnDate, setIsOnDate] = useState(false);
+  const navigate = useNavigate();
+  const [isOnView, setIsOnView] = useState(false);
 
   useEffect(() => {
     const callReport = async () => {
       try {
         const reportValue = await getReport(id);
+        if (reportValue === "reportError") {
+          navigate("*", { replace: true });
+          return;
+        }
         setReport(reportValue);
         setIsOnDate(true);
+        setIsOnView(true);
       } catch (error) {
-        throw new Error("독후감을 불러오지 못했습니다");
+        navigate("*", { replace: true });
       }
     };
 
     callReport();
-  }, [id]);
+  }, [id, navigate]);
 
   const Header = useMemo(
     () => <LinkHeader link="/bookList" title="한줄평" />,
@@ -32,19 +39,23 @@ function Report() {
   return (
     <>
       {Header}
-      <BookBackground>
-        <Content>
-          <ImageFrame>
-            {isOnDate && <p>{report.startDate.slice(0, 10)}일</p>}
-            <img src={report.imageUrl} alt={report.bookTitle} />
-            <p>{report.bookTitle}</p>
-          </ImageFrame>
-          <TextFrame>
-            <div>{report.title}</div>
-            <div>{report.text}</div>
-          </TextFrame>
-        </Content>
-      </BookBackground>
+      {isOnView && (
+        <BookBackground>
+          (
+          <Content>
+            <ImageFrame>
+              {isOnDate && <p>{report.startDate.slice(0, 10)}일</p>}
+              <img src={report.imageUrl} alt={report.bookTitle} />
+              <p>{report.bookTitle}</p>
+            </ImageFrame>
+            <TextFrame>
+              <div>{report.title}</div>
+              <div>{report.text}</div>
+            </TextFrame>
+          </Content>
+          )
+        </BookBackground>
+      )}
     </>
   );
 }
