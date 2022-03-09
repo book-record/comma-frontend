@@ -25,7 +25,7 @@ export const firebaseLogin = async () => {
 
     return data;
   } catch (error) {
-    throw new Error("로그인에 실패했습니다");
+    return error;
   }
 };
 
@@ -45,6 +45,6 @@ export const checkUser = async () => {
 
     return data;
   } catch (error) {
-    throw new Error("로그인에 실패했습니다");
+    return error;
   }
 };

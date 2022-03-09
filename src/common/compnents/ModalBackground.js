@@ -76,7 +76,7 @@ ModalBackground.propTypes = {
 };
 
 ModalBackground.defaultProps = {
-  onClick: "",
+  onClick: () => {},
   title: "",
   children: {},
 };

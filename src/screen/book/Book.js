@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { createReview, getBook } from "../../api/book";
@@ -22,13 +22,16 @@ function Book() {
   const [isClick, setIsClick] = useState(false);
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isReviewer, setIsReviewer] = useState(false);
+  const [isOnView, setIsOnView] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
   const formData = useSelector((state) => state.record.formData);
   const address = `/reportList/${user.id}`;
 
   const isComponentMounted = useIsMount();
+
   useEffect(() => {
     const callBook = async () => {
       try {
@@ -39,14 +42,15 @@ function Book() {
           setBook(data);
           setIsRecive(true);
           setIsClick(false);
+          setIsOnView(true);
         }
       } catch (error) {
-        throw new Error("책을 불러오지 못했습니다");
+        navigate("*", { replace: true });
       }
     };
 
     callBook();
-  }, [id, isComponentMounted, isClick, shouldIsShow]);
+  }, [id, isComponentMounted, isClick, shouldIsShow, navigate]);
 
   const Header = useMemo(
     () => <LinkHeader link={address} title="타임캡슐" />,
@@ -105,38 +109,44 @@ function Book() {
   return (
     <>
       {Header}
-      <Content>
-        <ImageFrame>
-          <img src={book.imageUrl} alt={book.bookTitle} />
-          {isRecive && bestReview && (
-            <BestReview
-              review={bestReview}
-              userId={user.id}
-              onClick={handlePushGood}
-            />
-          )}
-        </ImageFrame>
-        <TextFrame>
-          <TextTitle>{book.bookTitle}</TextTitle>
-          <TextAuthor>저자: {book.author}</TextAuthor>
-          <TextContent>{book.introduction}</TextContent>
-          {isRecive && (
-            <>
-              <TopicTitle />
-              <ScrollContainer>
-                <Review book={book} userId={user.id} onClick={handlePushGood} />
-              </ScrollContainer>
-            </>
-          )}
-          <ButtonContainer>
-            <ActiveButton
-              onClick={handleOnModal}
-              disabled={false}
-              title="등록하기"
-            />
-          </ButtonContainer>
-        </TextFrame>
-      </Content>
+      {isOnView && (
+        <Content>
+          <ImageFrame>
+            <img src={book.imageUrl} alt={book.bookTitle} />
+            {isRecive && bestReview && (
+              <BestReview
+                review={bestReview}
+                userId={user.id}
+                onClick={handlePushGood}
+              />
+            )}
+          </ImageFrame>
+          <TextFrame>
+            <TextTitle>{book.bookTitle}</TextTitle>
+            <TextAuthor>저자: {book.author}</TextAuthor>
+            <TextContent>{book.introduction}</TextContent>
+            {isRecive && (
+              <>
+                <TopicTitle />
+                <ScrollContainer>
+                  <Review
+                    book={book}
+                    userId={user.id}
+                    onClick={handlePushGood}
+                  />
+                </ScrollContainer>
+              </>
+            )}
+            <ButtonContainer>
+              <ActiveButton
+                onClick={handleOnModal}
+                disabled={false}
+                title="등록하기"
+              />
+            </ButtonContainer>
+          </TextFrame>
+        </Content>
+      )}
       <ModalBackground
         title="등록하기"
         onClick={handleSubmitReview}

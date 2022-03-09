@@ -8,10 +8,9 @@ export const getReportList = async (pageNumber, id) => {
         withCredentials: true,
       }
     );
-
     return data;
   } catch (error) {
-    throw new Error("독후감 리스트를 불러오지 못했습니다");
+    return error;
   }
 };
 
@@ -25,7 +24,7 @@ export const createRport = async (list) => {
 
     return data;
   } catch (error) {
-    throw new Error("독후감을 등록하지 못했습니다");
+    return error;
   }
 };
 
@@ -38,6 +37,6 @@ export const getReport = async (id) => {
 
     return data;
   } catch (error) {
-    return error;
+    return "reportError";
   }
 };

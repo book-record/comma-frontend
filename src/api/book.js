@@ -8,10 +8,9 @@ export const getBookList = async (pageNumber) => {
         withCredentials: true,
       }
     );
-
     return data;
   } catch (error) {
-    throw new Error("책 리스트를 불러오지 못했습니다");
+    return error;
   }
 };
 

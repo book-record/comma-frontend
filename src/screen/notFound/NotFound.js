@@ -6,7 +6,7 @@ function NotFound() {
     <NotFoundPage>
       <div>
         <h2>404</h2>
-        This is not the web page you are looking for.
+        This is not the web page you are looking for
       </div>
     </NotFoundPage>
   );
