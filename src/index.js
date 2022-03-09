@@ -6,12 +6,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RequireAuth from "./common/compnents/RequireAuth";
 import GlobalStyle from "./common/compnents/style/GlobalStyle";
 import Book from "./screen/book/Book";
-import BookPages from "./screen/bookPages/BookPages";
+import BookPages from "./screen/bookPage/BookPage";
 import Login from "./screen/login/Login";
 import Main from "./screen/main/Main";
 import NotFound from "./screen/notFound/NotFound";
 import Report from "./screen/report/Report";
-import ReportPages from "./screen/reportPages/ReportPages";
+import ReportPages from "./screen/reportPage/ReportPage";
 import store from "./store/store";
 
 ReactDOM.render(
