@@ -137,8 +137,9 @@ const Background = styled.div`
 `;
 
 const OnModalButton = styled.button`
-  font-size: 25px;
-  margin: 10px;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 20px;
+  margin: 10px 20px;
   border: none;
   background: none;
 `;

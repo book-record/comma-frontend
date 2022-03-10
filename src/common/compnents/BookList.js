@@ -13,6 +13,10 @@ function BookList({ posts, onClick }) {
         const currentDate = dayjs(new Date());
 
         const completeDday = validateDate(currentDate, finishDate);
+        const title =
+          post.bookTitle.length > 16
+            ? post.bookTitle.slice(0, 16).concat("...")
+            : post.bookTitle;
 
         return (
           <BookFrame
@@ -22,7 +26,7 @@ function BookList({ posts, onClick }) {
             data-day={completeDday}
           >
             <img src={post.imageUrl} alt={posts.bookTitle} />
-            <p>{post.bookTitle}</p>
+            <p>{title}</p>
             {post.finishDate && (
               <DdayText date={completeDday}>{completeDday}</DdayText>
             )}
@@ -55,8 +59,8 @@ const BookFrame = styled.div`
     height: 200px;
   }
   p {
-    font-family: "Nanum Myeongjo", serif;
-    font-size: 12px;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 13px;
   }
   &:hover {
     background: #eceff1;
@@ -66,8 +70,8 @@ const BookFrame = styled.div`
 `;
 
 const DdayText = styled.p`
-  font-family: "Nanum Myeongjo", serif;
-  font-size: 12px;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 10px;
   color: ${({ date }) => (date === "D-day" ? "red" : "#000")};
 `;
 

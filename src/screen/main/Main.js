@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { Title } from "../../common/constants/FONT";
-
 function Main() {
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
@@ -19,15 +17,11 @@ function Main() {
   return (
     <Background>
       <Halfground type="button" onClick={handleMoveBookList}>
-        <Title>
-          <h2>한줄평</h2>
-        </Title>
+        <h2>한줄평</h2>
       </Halfground>
 
       <Halfground type="button" onClick={handleMoverReportList}>
-        <Title>
-          <h2>타임캡슐</h2>
-        </Title>
+        <h2>타임캡슐</h2>
       </Halfground>
     </Background>
   );
@@ -51,6 +45,12 @@ const Halfground = styled.button`
   width: 50%;
   height: 100%;
   background: #707274;
+  h2 {
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: white;
+  }
   &:hover {
     background: #e19894;
     transition: all 0.35s ease-in;
