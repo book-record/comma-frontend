@@ -9,6 +9,7 @@ import BookList from "../../common/compnents/BookList";
 import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
+import OnModalButton from "../../common/compnents/OnModalButton";
 import PageNation from "../../common/compnents/PageNation";
 
 function BookPages() {
@@ -65,7 +66,7 @@ function BookPages() {
     setShouldIsShow(false);
   };
 
-  const handlechooseBook = (e) => {
+  const handleMoveBook = (e) => {
     navigate(`/book/${e.currentTarget.id}`);
   };
 
@@ -77,9 +78,7 @@ function BookPages() {
   return (
     <Background>
       {Header}
-      <OnModalButton type="button" onClick={handleOnModal}>
-        등록하기
-      </OnModalButton>
+      <OnModalButton onClick={handleOnModal} text="등록하기" />
       <ModalBackground
         show={shouldIsShow}
         onClose={handleCloseModal}
@@ -115,7 +114,7 @@ function BookPages() {
           )}
         </TextFrame>
       </ModalBackground>
-      <BookList posts={posts} onClick={handlechooseBook} />
+      <BookList posts={posts} onClick={handleMoveBook} />
       <footer>
         <PageNation
           setPageNumber={setPageNumber}
@@ -134,14 +133,6 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`;
-
-const OnModalButton = styled.button`
-  font-family: "Nanum Gothic", sans-serif;
-  font-size: 20px;
-  margin: 10px 20px;
-  border: none;
-  background: none;
 `;
 
 const ImageFrame = styled.div`

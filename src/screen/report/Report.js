@@ -73,7 +73,6 @@ const BookBackground = styled.div`
 
 const Content = styled.div`
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
 `;
@@ -83,7 +82,7 @@ const ImageFrame = styled.div`
   width: 27%;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-right: 60px;
   img {
     width: 200px;
@@ -97,7 +96,7 @@ const TextFrame = styled.div`
   align-items: center;
   p {
     margin-top: 30px;
-    font-size: 14px;
+    font-size: 15px;
   }
 `;
 

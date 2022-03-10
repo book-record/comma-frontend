@@ -123,7 +123,7 @@ function Book() {
             </ImageFrame>
             <TextFrame>
               <TextTitle>{book.bookTitle}</TextTitle>
-              <TextAuthor>저자: {book.author}</TextAuthor>
+              <TextAuthor>저자 : {book.author}</TextAuthor>
               <TextContent>{book.introduction}</TextContent>
               {isRecive && (
                 <>
@@ -182,7 +182,7 @@ const Container = styled.div`
   margin-top: 30px;
   width: 90%;
   height: 90%;
-  background: #e19894;
+  border-radius: 10px;
 `;
 
 const ImageFrame = styled.div`
@@ -199,7 +199,10 @@ const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
   width: 35%;
-  margin: 60px 20px 0 20px;
+  height: 83%;
+  margin: 30px 20px 0px 20px;
+  padding: 10px;
+  background: #fbe9e7;
 `;
 
 const TopicTitle = styled.div`
