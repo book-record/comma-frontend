@@ -49,8 +49,8 @@ function Report() {
               <p>{report.bookTitle}</p>
             </ImageFrame>
             <TextFrame>
-              <div>{report.title}</div>
-              <div>{report.text}</div>
+              <h2>{report.title}</h2>
+              <p>{report.text}</p>
             </TextFrame>
           </Content>
           )
@@ -68,11 +68,11 @@ const BookBackground = styled.div`
   background-position: center;
   width: 100%;
   height: 75vh;
+  font-family: "Nanum Gothic", sans-serif;
 `;
 
 const Content = styled.div`
   display: flex;
-  text-align: center;
   justify-content: center;
   align-items: center;
 `;
@@ -82,7 +82,7 @@ const ImageFrame = styled.div`
   width: 27%;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
   margin-right: 60px;
   img {
     width: 200px;
@@ -94,9 +94,9 @@ const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  div {
-    margin-top: 40px;
-    font-size: 14px;
+  p {
+    margin-top: 30px;
+    font-size: 15px;
   }
 `;
 

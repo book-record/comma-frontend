@@ -110,40 +110,42 @@ function Book() {
       {Header}
       {isOnView && (
         <Content>
-          <ImageFrame>
-            <img src={book.imageUrl} alt={book.bookTitle} />
-            {isRecive && bestReview && (
-              <BestReview
-                review={bestReview}
-                userId={user.id}
-                onClick={handlePushGood}
-              />
-            )}
-          </ImageFrame>
-          <TextFrame>
-            <TextTitle>{book.bookTitle}</TextTitle>
-            <TextAuthor>저자: {book.author}</TextAuthor>
-            <TextContent>{book.introduction}</TextContent>
-            {isRecive && (
-              <>
-                <TopicTitle />
-                <ScrollContainer>
-                  <Review
-                    book={book}
-                    userId={user.id}
-                    onClick={handlePushGood}
-                  />
-                </ScrollContainer>
-              </>
-            )}
-            <ButtonContainer>
-              <ActiveButton
-                onClick={handleOnModal}
-                disabled={false}
-                title="등록하기"
-              />
-            </ButtonContainer>
-          </TextFrame>
+          <Container>
+            <ImageFrame>
+              <img src={book.imageUrl} alt={book.bookTitle} />
+              {isRecive && bestReview && (
+                <BestReview
+                  review={bestReview}
+                  userId={user.id}
+                  onClick={handlePushGood}
+                />
+              )}
+            </ImageFrame>
+            <TextFrame>
+              <TextTitle>{book.bookTitle}</TextTitle>
+              <TextAuthor>저자 : {book.author}</TextAuthor>
+              <TextContent>{book.introduction}</TextContent>
+              {isRecive && (
+                <>
+                  <TopicTitle />
+                  <ScrollContainer>
+                    <Review
+                      book={book}
+                      userId={user.id}
+                      onClick={handlePushGood}
+                    />
+                  </ScrollContainer>
+                </>
+              )}
+              <ButtonContainer>
+                <ActiveButton
+                  onClick={handleOnModal}
+                  disabled={false}
+                  title="등록하기"
+                />
+              </ButtonContainer>
+            </TextFrame>
+          </Container>
         </Content>
       )}
       <ModalBackground
@@ -174,6 +176,15 @@ const Content = styled.div`
   height: 90vh;
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+`;
+
 const ImageFrame = styled.div`
   display: flex;
   flex-direction: column;
@@ -188,7 +199,16 @@ const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
   width: 35%;
-  margin: 100px 20px 0 20px;
+  height: 83%;
+  margin: 30px 20px 0px 20px;
+  padding: 10px;
+  background: #fbe9e7;
+`;
+
+const TopicTitle = styled.div`
+  display: flex;
+  border-top: 1px solid black;
+  justify-content: space-between;
 `;
 
 const TextTitle = styled.div`
@@ -197,12 +217,13 @@ const TextTitle = styled.div`
   font-weight: 700;
 `;
 
-const TopicTitle = styled.div`
-  display: flex;
-  border-top: 1px solid black;
-  margin: 15px 0;
-  padding-top: 10px;
-  justify-content: space-between;
+const TextAuthor = styled.div`
+  font-size: 15px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
+  color: #da6d58;
+  margin: 10px 0 10px 0;
+  width: 90%;
 `;
 
 const TextContent = styled.div`
@@ -210,22 +231,13 @@ const TextContent = styled.div`
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
   border-top: 1px solid black;
-  padding-top: 10px;
-`;
-
-const TextAuthor = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
-  color: #da6d58;
-  margin: 0px 0 10px 0;
-  width: 90%;
+  padding: 10px;
 `;
 
 const ScrollContainer = styled.div`
   height: 230px;
   overflow-y: scroll;
-  margin-top: 80px;
+  margin-top: 10px;
 `;
 
 const RecordWrapper = styled.div`

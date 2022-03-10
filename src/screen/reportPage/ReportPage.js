@@ -10,6 +10,7 @@ import BookList from "../../common/compnents/BookList";
 import FindBook from "../../common/compnents/FindBook";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
+import OnModalButton from "../../common/compnents/OnModalButton";
 import PageNation from "../../common/compnents/PageNation";
 import Text from "./components/Text";
 import Title from "./components/Title";
@@ -26,7 +27,9 @@ function ReportPages() {
   const [reportTitle, setReportTitle] = useState("");
   const [reportText, setRerpotText] = useState("");
 
-  const textValue = 500 - reportText.length;
+  const limitText = 500;
+  const limitTitle = 20;
+  const textValue = limitText - reportText.length;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,10 +39,12 @@ function ReportPages() {
           pageNumber,
           userId
         );
+
         if (!totalPage || !reportList) {
           navigate("*", { replace: true });
           return;
         }
+
         setPosts(reportList);
         setNumberOfPages(totalPage);
       } catch (error) {
@@ -60,12 +65,22 @@ function ReportPages() {
   };
 
   const handleSaveReport = async () => {
+    if (!reportTitle || !reportText) {
+      return;
+    }
+
     const list = {
       id: userId,
       bookTitle: book[0].title,
       imageUrl: book[0].thumbnail,
-      title: reportTitle,
-      text: reportText,
+      title:
+        reportTitle.trim().length > limitTitle
+          ? reportTitle.slice(0, limitTitle)
+          : reportTitle,
+      text:
+        reportText.length > limitText
+          ? reportText.slice(0, limitText)
+          : reportText,
       startDate: new Date().toISOString(),
       finishDate: dayjs(new Date()).add(3, "m").toISOString(),
     };
@@ -78,7 +93,7 @@ function ReportPages() {
     setShouldIsShow(false);
   };
 
-  const handleChooseReport = (e) => {
+  const handleMoveReport = (e) => {
     if (e.currentTarget.dataset.day === "D-day") {
       return navigate(`/report/${e.currentTarget.id}`);
     }
@@ -102,9 +117,7 @@ function ReportPages() {
   return (
     <Background>
       {Header}
-      <OnModalButton type="button" onClick={handleOnModal}>
-        보내기
-      </OnModalButton>
+      <OnModalButton onClick={handleOnModal} text="보내기" />
       {isError && (
         <ModalBackground show={shouldIsShow} onClose={handleCloseModal}>
           <RecordWrapper>
@@ -146,7 +159,7 @@ function ReportPages() {
           </TextFrame>
         </ModalBackground>
       )}
-      <BookList posts={posts} onClick={handleChooseReport} />
+      <BookList posts={posts} onClick={handleMoveReport} />
       <footer>
         <PageNation
           setPageNumber={setPageNumber}
@@ -164,13 +177,6 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-`;
-
-const OnModalButton = styled.button`
-  font-size: 25px;
-  margin: 10px;
-  border: none;
-  background: none;
 `;
 
 const ImageFrame = styled.div`

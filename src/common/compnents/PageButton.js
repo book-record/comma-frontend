@@ -12,20 +12,18 @@ function PageButton({ onClick, disabled, title }) {
 
 const Button = styled.button`
   border: none;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 4px;
+  padding: 8px;
   background: black;
   color: white;
   font-size: 18px;
   margin: 8px;
-  margin-top: 20px;
-
+  margin-top: 10px;
   &:hover {
-    background: tomato;
+    background: #373737;
     cursor: pointer;
     transform: translateY(-2px);
   }
-
   &[disabled] {
     background: grey;
     cursor: revert;

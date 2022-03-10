@@ -8,6 +8,7 @@ function ModalBackground({ show, onClose, onClick, children, title }) {
   if (!show) {
     return null;
   }
+
   return (
     <ModalBack onClick={onClose}>
       <ModalInside onClick={(e) => e.stopPropagation()}>
@@ -42,8 +43,8 @@ const ModalInside = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  width: 1300px;
-  height: 650px;
+  width: 1200px;
+  height: 640px;
   background-color: #fff1e8;
   border-radius: 10px;
 `;
@@ -59,7 +60,7 @@ const ModalContent = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  width: 77%;
+  width: 84%;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;

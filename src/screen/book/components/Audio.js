@@ -101,6 +101,7 @@ function Audio() {
 
   return (
     <AudioWrapper>
+      <p>{onRec ? "대기상태" : "녹음 진행 중"}</p>
       {streamRec && (
         <>
           <audio controls>
@@ -117,7 +118,7 @@ function Audio() {
       {!streamRec && (
         <>
           <ActiveButton
-            title={onRec ? "녹음" : "멈추기"}
+            title={onRec ? "녹음 " : "멈추기"}
             onClick={onRec ? onRecAudio : offRecAudio}
             disabled={false}
           />
@@ -133,7 +134,10 @@ function Audio() {
 }
 
 const AudioWrapper = styled.div`
-  margin-top: 150px;
+  margin-top: 70px;
+  p {
+    font-size: 20px;
+  }
   audio {
     width: 280px;
     height: 30px;

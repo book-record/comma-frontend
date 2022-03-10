@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import { firebaseLogin } from "../../api/auth";
 import googleLogo from "../../assets/googleButton.png";
-import { Title } from "../../common/constants/FONT";
 import { signIn } from "../../store/userSlice";
 
 function Login() {
@@ -21,11 +20,9 @@ function Login() {
   return (
     <BackGround>
       <Container>
-        <Title>
-          <h1>
-            쉼표<span>,</span>
-          </h1>
-        </Title>
+        <h1>
+          쉼 표<span>,</span>
+        </h1>
         <GoogleButton type="button" onClick={handleLoginButton}>
           <img src={googleLogo} alt="googleButton" />
         </GoogleButton>
@@ -54,10 +51,20 @@ const Container = styled.div`
   height: 600px;
   border-radius: 10px;
   background-color: white;
+  h1 {
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 120px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  span {
+    font-family: "Nanum Myeongjo", serif;
+    font-size: 180px;
+  }
 `;
 
 const GoogleButton = styled.button`
-  margin-top: 180px;
+  margin-top: 150px;
   border: none;
   background: none;
   img {
