@@ -21,10 +21,9 @@ function Review({ book, userId, onClick }) {
 const ReviewContainer = styled.div`
   display: flex;
   align-items: center;
-  text-align: center;
-  justify-content: space-between;
+  justify-content: space-around;
   audio {
-    width: 280px;
+    width: 250px;
     height: 30px;
   }
 `;

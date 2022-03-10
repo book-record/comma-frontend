@@ -9,9 +9,9 @@ function LikeContainer({ onClick, userId, review }) {
     <HeartContainer>
       <div onClick={onClick}>
         {review.likes.includes(userId) ? (
-          <div id={review._id}>❤️</div>
+          <p id={review._id}>♥️</p>
         ) : (
-          <div id={review._id}>♡</div>
+          <p id={review._id}>♡</p>
         )}
       </div>
       <p>{review.likes.length}</p>
@@ -32,7 +32,7 @@ const HeartContainer = styled.div`
   border-radius: 10px;
   p {
     color: #fff;
-    font-size: 15px;
+    font-size: 18px;
     margin-left: 4px;
   }
 `;

@@ -29,7 +29,7 @@ const BackGround = styled.div`
   left: 0;
   padding: 20px;
   margin-top: 30px;
-  background: #eeeeee;
+  background: #eceff1;
   audio {
     width: 280px;
     height: 30px;

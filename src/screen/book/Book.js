@@ -120,6 +120,11 @@ function Book() {
                   onClick={handlePushGood}
                 />
               )}
+              {!bestReview && (
+                <BestReviewContainer>
+                  <h2>아직 베스트 평이 없습니다</h2>
+                </BestReviewContainer>
+              )}
             </ImageFrame>
             <TextFrame>
               <TextTitle>{book.bookTitle}</TextTitle>
@@ -195,13 +200,26 @@ const ImageFrame = styled.div`
   }
 `;
 
+const BestReviewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  margin-top: 141px;
+  background: #9ea7aa;
+`;
+
 const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
-  width: 35%;
-  height: 83%;
+  width: 40%;
+  height: 86%;
   margin: 30px 20px 0px 20px;
-  padding: 10px;
+
+  padding: 20px 20px 0 20px;
   background: #fbe9e7;
 `;
 
@@ -228,16 +246,18 @@ const TextAuthor = styled.div`
 
 const TextContent = styled.div`
   font-size: 15px;
+  border-top: 1px solid black;
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
-  border-top: 1px solid black;
-  padding: 10px;
+  padding: 15px 0 15px 0;
 `;
 
 const ScrollContainer = styled.div`
-  height: 230px;
+  height: 240px;
+  margin-bottom: 5px;
   overflow-y: scroll;
   margin-top: 10px;
+  background: #fff;
 `;
 
 const RecordWrapper = styled.div`

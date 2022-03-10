@@ -55,6 +55,7 @@ const ModalContent = styled.div`
   height: 470px;
   background-color: #fff;
   border-radius: 10px;
+  margin-top: 40px;
   flex-direction: column;
   flex-wrap: wrap;
 `;
@@ -62,6 +63,7 @@ const ModalContent = styled.div`
 const ButtonContainer = styled.div`
   width: 84%;
   display: flex;
+  margin-top: 20px;
   justify-content: flex-end;
   flex-direction: row;
 `;
