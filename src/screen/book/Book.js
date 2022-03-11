@@ -27,7 +27,7 @@ function Book() {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
-  const formData = useSelector((state) => state.record.formData);
+  const { formData, isValue } = useSelector((state) => state.record);
   const address = `/reportList/${user.id}`;
 
   const isComponentMounted = useIsMount();
@@ -83,7 +83,7 @@ function Book() {
   // eslint-disable-next-line consistent-return
   const handleOnModal = () => {
     setShouldIsShow(true);
-    dispatch(recordSound({ content: null, formData: null }));
+    dispatch(recordSound({ content: null, formData: null, value: false }));
     if (bestReview) {
       if (bestReview.id === user.id) {
         return setIsReviewer(true);
@@ -101,8 +101,10 @@ function Book() {
   };
 
   const handleSubmitReview = async () => {
-    await createReview(id, user.id, formData);
-    setShouldIsShow(false);
+    if (isValue) {
+      await createReview(id, user.id, formData);
+      setShouldIsShow(false);
+    }
   };
 
   return (
@@ -184,16 +186,17 @@ const Content = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 60px;
   width: 90%;
-  height: 90%;
+  height: 85%;
   border-radius: 10px;
 `;
 
 const ImageFrame = styled.div`
   display: flex;
+  height: 523px;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   img {
     width: 180px;
@@ -202,13 +205,7 @@ const ImageFrame = styled.div`
 
 const BestReviewContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  top: 0;
-  left: 0;
   padding: 10px;
-  margin-top: 141px;
   background: #9ea7aa;
 `;
 
@@ -217,8 +214,6 @@ const TextFrame = styled.div`
   flex-direction: column;
   width: 40%;
   height: 86%;
-  margin: 30px 20px 0px 20px;
-
   padding: 20px 20px 0 20px;
   background: #fbe9e7;
 `;
@@ -278,6 +273,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+  margin-bottom: 5px;
 `;
 
 const ErrorMessage = styled.div`

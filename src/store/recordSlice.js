@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   content: null,
   formData: null,
+  isValue: false,
 };
 
 export const recordSlice = createSlice({
@@ -10,9 +11,10 @@ export const recordSlice = createSlice({
   initialState,
   reducers: {
     recordSound: (state, action) => {
-      const { content, data } = action.payload;
+      const { content, data, value } = action.payload;
       state.content = content;
       state.formData = data;
+      state.isValue = value;
     },
   },
 });

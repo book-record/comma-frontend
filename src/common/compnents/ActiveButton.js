@@ -15,11 +15,11 @@ const Button = styled.button`
   height: 50px;
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 8px;
   margin: 5px;
   background-color: #da6d58;
   color: #fff;
-  font-size: 25px;
+  font-size: 22px;
 `;
 
 export default ActiveButton;

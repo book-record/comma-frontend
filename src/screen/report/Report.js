@@ -81,14 +81,14 @@ const Content = styled.div`
 const ImageContainer = styled.div`
   display: flex;
   text-align: center;
-  width: 500px;
-  margin-left: 430px;
+  width: 600px;
+  margin-left: 423px;
 `;
 
 const ImageFrame = styled.div`
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
   img {
     width: 200px;
   }
@@ -98,7 +98,7 @@ const TextContainer = styled.div`
   display: flex;
   width: 400px;
   margin-top: 20px;
-  margin-right: 370px;
+  margin-right: 380px;
   h2 {
     text-align: center;
   }

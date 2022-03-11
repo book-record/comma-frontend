@@ -52,7 +52,7 @@ const ModalInside = styled.div`
 const ModalContent = styled.div`
   display: flex;
   width: 1000px;
-  height: 470px;
+  height: 490px;
   background-color: #fff;
   border-radius: 10px;
   margin-top: 40px;
