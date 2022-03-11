@@ -41,19 +41,21 @@ function Report() {
       {Header}
       {isOnView && (
         <BookBackground>
-          (
           <Content>
-            <ImageFrame>
-              {isOnDate && <p>{report.startDate.slice(0, 10)}일</p>}
-              <img src={report.imageUrl} alt={report.bookTitle} />
-              <p>{report.bookTitle}</p>
-            </ImageFrame>
-            <TextFrame>
-              <h2>{report.title}</h2>
-              <p>{report.text}</p>
-            </TextFrame>
+            <ImageContainer>
+              <ImageFrame>
+                {isOnDate && <p>{report.startDate.slice(0, 10)}일</p>}
+                <img src={report.imageUrl} alt={report.bookTitle} />
+                <p>{report.bookTitle}</p>
+              </ImageFrame>
+            </ImageContainer>
+            <TextContainer>
+              <TextFrame>
+                <h2>{report.title}</h2>
+                <p>{report.text}</p>
+              </TextFrame>
+            </TextContainer>
           </Content>
-          )
         </BookBackground>
       )}
     </>
@@ -74,26 +76,40 @@ const BookBackground = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  text-align: center;
+  width: 600px;
+  margin-left: 423px;
 `;
 
 const ImageFrame = styled.div`
-  display: flex;
-  width: 27%;
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  margin-right: 60px;
   img {
     width: 200px;
+  }
+  p {
+    width: 230px;
+  }
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  width: 400px;
+  margin-top: 20px;
+  margin-right: 380px;
+  h2 {
+    text-align: center;
   }
 `;
 
 const TextFrame = styled.div`
-  width: 22%;
-  display: flex;
+  width: 100%;
   flex-direction: column;
-  align-items: center;
   p {
     margin-top: 30px;
     font-size: 15px;

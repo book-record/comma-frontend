@@ -52,9 +52,10 @@ const ModalInside = styled.div`
 const ModalContent = styled.div`
   display: flex;
   width: 1000px;
-  height: 470px;
+  height: 490px;
   background-color: #fff;
   border-radius: 10px;
+  margin-top: 40px;
   flex-direction: column;
   flex-wrap: wrap;
 `;
@@ -62,6 +63,7 @@ const ModalContent = styled.div`
 const ButtonContainer = styled.div`
   width: 84%;
   display: flex;
+  margin-top: 20px;
   justify-content: flex-end;
   flex-direction: row;
 `;

@@ -27,7 +27,7 @@ function Book() {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
-  const formData = useSelector((state) => state.record.formData);
+  const { formData, isValue } = useSelector((state) => state.record);
   const address = `/reportList/${user.id}`;
 
   const isComponentMounted = useIsMount();
@@ -83,7 +83,7 @@ function Book() {
   // eslint-disable-next-line consistent-return
   const handleOnModal = () => {
     setShouldIsShow(true);
-    dispatch(recordSound({ content: null, formData: null }));
+    dispatch(recordSound({ content: null, formData: null, value: false }));
     if (bestReview) {
       if (bestReview.id === user.id) {
         return setIsReviewer(true);
@@ -101,8 +101,10 @@ function Book() {
   };
 
   const handleSubmitReview = async () => {
-    await createReview(id, user.id, formData);
-    setShouldIsShow(false);
+    if (isValue) {
+      await createReview(id, user.id, formData);
+      setShouldIsShow(false);
+    }
   };
 
   return (
@@ -119,6 +121,11 @@ function Book() {
                   userId={user.id}
                   onClick={handlePushGood}
                 />
+              )}
+              {!bestReview && (
+                <BestReviewContainer>
+                  <h2>아직 베스트 평이 없습니다</h2>
+                </BestReviewContainer>
               )}
             </ImageFrame>
             <TextFrame>
@@ -179,29 +186,35 @@ const Content = styled.div`
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 60px;
   width: 90%;
-  height: 90%;
+  height: 85%;
   border-radius: 10px;
 `;
 
 const ImageFrame = styled.div`
   display: flex;
+  height: 523px;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   img {
     width: 180px;
   }
 `;
 
+const BestReviewContainer = styled.div`
+  display: flex;
+  padding: 10px;
+  background: #9ea7aa;
+`;
+
 const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
-  width: 35%;
-  height: 83%;
-  margin: 30px 20px 0px 20px;
-  padding: 10px;
+  width: 40%;
+  height: 86%;
+  padding: 20px 20px 0 20px;
   background: #fbe9e7;
 `;
 
@@ -228,16 +241,18 @@ const TextAuthor = styled.div`
 
 const TextContent = styled.div`
   font-size: 15px;
+  border-top: 1px solid black;
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
-  border-top: 1px solid black;
-  padding: 10px;
+  padding: 15px 0 15px 0;
 `;
 
 const ScrollContainer = styled.div`
-  height: 230px;
+  height: 240px;
+  margin-bottom: 5px;
   overflow-y: scroll;
   margin-top: 10px;
+  background: #fff;
 `;
 
 const RecordWrapper = styled.div`
@@ -258,6 +273,7 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
+  margin-bottom: 5px;
 `;
 
 const ErrorMessage = styled.div`

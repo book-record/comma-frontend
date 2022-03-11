@@ -29,7 +29,8 @@ const BackGround = styled.div`
   left: 0;
   padding: 20px;
   margin-top: 30px;
-  background: #eeeeee;
+  background: #eceff1;
+  font-family: "Nanum Gothic Coding", monospace;
   audio {
     width: 280px;
     height: 30px;
@@ -39,7 +40,6 @@ const BackGround = styled.div`
 const UserInfo = styled.div`
   display: flex;
   justify-content: space-evenly;
-  font-family: "Nanum Gothic Coding", monospace;
   font-size: 25px;
 `;
 

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import ActiveButton from "../../../common/compnents/ActiveButton";
 import { recordSound } from "../../../store/recordSlice";
@@ -9,6 +9,7 @@ function Audio() {
   const [stream, setStream] = useState("");
   const [media, setMedia] = useState("");
   const [onRec, setOnRec] = useState(true);
+  const [isSave, setIsSave] = useState(false);
   const [source, setSource] = useState("");
   const [analyser, setAnalyser] = useState("");
   const [audioUrl, setAudioUrl] = useState("");
@@ -54,9 +55,11 @@ function Audio() {
             mediaRecorder.ondataavailable = function onMediaRecord(e) {
               setAudioUrl(e.data);
               setOnRec(true);
+              setIsSave(true);
             };
           } else {
             setOnRec(false);
+            setIsSave(false);
           }
         };
       });
@@ -66,6 +69,7 @@ function Audio() {
     media.ondataavailable = function responseBlobData(event) {
       setAudioUrl(event.data);
       setOnRec(true);
+      setIsSave(true);
     };
 
     stream.getAudioTracks().forEach((track) => {
@@ -91,19 +95,27 @@ function Audio() {
     const recordFile = {
       content: URL.createObjectURL(audioUrl),
       data: formData,
+      value: true,
     };
     dispatch(recordSound(recordFile));
   }, [audioUrl, dispatch]);
 
   const handleResetAudioFile = () => {
-    dispatch(recordSound({ content: null, formData: null }));
+    dispatch(recordSound({ content: null, formData: null, value: false }));
   };
 
   return (
     <AudioWrapper>
-      <p>{onRec ? "대기상태" : "녹음 진행 중"}</p>
+      <div className="reocrdingBox">
+        {!onRec && (
+          <>
+            <p>녹음중 </p>
+            <p className="recording" />
+          </>
+        )}
+      </div>
       {streamRec && (
-        <>
+        <div>
           <audio controls>
             <track kind="captions" />
             <source src={streamRec} />
@@ -113,34 +125,75 @@ function Audio() {
             onClick={handleResetAudioFile}
             disabled={false}
           />
-        </>
+        </div>
       )}
       {!streamRec && (
-        <>
+        <div className="buttonContainer">
           <ActiveButton
             title={onRec ? "녹음 " : "멈추기"}
             onClick={onRec ? onRecAudio : offRecAudio}
             disabled={false}
           />
-          <ActiveButton
-            title="저장하기"
-            onClick={onSubmitAudioFile}
-            disabled={disabled}
-          />
-        </>
+          {onRec && isSave && (
+            <ActiveButton
+              title="저장하기"
+              onClick={onSubmitAudioFile}
+              disabled={disabled}
+            />
+          )}
+        </div>
       )}
     </AudioWrapper>
   );
 }
 
+const Recording = keyframes`
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+`;
+
 const AudioWrapper = styled.div`
   margin-top: 70px;
-  p {
-    font-size: 20px;
+  .reocrdingBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   audio {
     width: 280px;
     height: 30px;
+    margin-bottom: 10px;
+  }
+  .recording {
+    background: red;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 20px;
+    animation: ${Recording} 1s infinite;
+  }
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
   }
 `;
 
