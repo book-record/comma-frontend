@@ -82,7 +82,7 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (text.length > 2) {
+      if (text.length > 1) {
         handleSearchBook(text);
       }
     }, 500);

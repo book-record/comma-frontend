@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
+import LikeContainer from "../../../common/compnents/LikeContainer";
+
 function BestReview({ review, userId, onClick }) {
   return (
     <BackGround>
@@ -12,14 +14,7 @@ function BestReview({ review, userId, onClick }) {
       </audio>
       <UserInfo>
         <p>{review.nickname}</p>
-        <GoodContaniner onClick={onClick}>
-          {review.likes.includes(userId) ? (
-            <div id={review._id}>❤️</div>
-          ) : (
-            <div id={review._id}>♡</div>
-          )}
-        </GoodContaniner>
-        <p>좋아요{review.likes.length}</p>
+        <LikeContainer onClick={onClick} userId={userId} review={review} />
       </UserInfo>
     </BackGround>
   );
@@ -34,7 +29,8 @@ const BackGround = styled.div`
   left: 0;
   padding: 20px;
   margin-top: 30px;
-  background: #eeeeee;
+  background: #eceff1;
+  font-family: "Nanum Gothic Coding", monospace;
   audio {
     width: 280px;
     height: 30px;
@@ -44,12 +40,7 @@ const BackGround = styled.div`
 const UserInfo = styled.div`
   display: flex;
   justify-content: space-evenly;
-  font-family: "Nanum Gothic Coding", monospace;
   font-size: 25px;
-`;
-
-const GoodContaniner = styled.div`
-  margin-top: 15px;
 `;
 
 export default BestReview;

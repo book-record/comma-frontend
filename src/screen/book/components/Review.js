@@ -2,23 +2,18 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
+import LikeContainer from "../../../common/compnents/LikeContainer";
+
 function Review({ book, userId, onClick }) {
   return book.reviewHistory?.map((reviewer, i) => (
     <ReviewContainer key={reviewer._id}>
-      <div>{i + 2}번째</div>
+      <p>{i + 2}등</p>
       <audio controls>
         <track kind="captions" />
         <source src={reviewer.sound} />
       </audio>
       <div>{reviewer.nickname}</div>
-      <HeartButton onClick={onClick}>
-        {reviewer.likes.includes(userId) ? (
-          <div id={reviewer._id}>❤️</div>
-        ) : (
-          <div id={reviewer._id}>♡</div>
-        )}
-      </HeartButton>
-      <div>{reviewer.likes.length}</div>
+      <LikeContainer onClick={onClick} userId={userId} review={reviewer} />
     </ReviewContainer>
   ));
 }
@@ -26,19 +21,11 @@ function Review({ book, userId, onClick }) {
 const ReviewContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 92%;
+  justify-content: space-around;
   audio {
-    width: 280px;
+    width: 250px;
     height: 30px;
   }
-`;
-
-const HeartButton = styled.div`
-  margin-top: 14px;
-  font-size: 30px;
-  height: 100%;
-  border: none;
 `;
 
 export default Review;

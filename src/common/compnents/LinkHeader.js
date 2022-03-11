@@ -7,6 +7,7 @@ function LinkHeader({ link, title }) {
   const handleLogout = () => {
     localStorage.clear();
   };
+
   return (
     <Header>
       <StyledLink to="/">쉼표</StyledLink>
@@ -25,9 +26,9 @@ const StyledLink = styled(Link)`
   padding: 4px 8px;
   text-align: center;
   color: #fff;
-  font-size: 30px;
+  font-size: 35px;
   text-decoration: none;
-  font-family: "Nanum Gothic Coding", monospace;
+  font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
 `;
 
@@ -44,6 +45,7 @@ const Header = styled.div`
 const LogoutButton = styled.button`
   border: none;
   background: none;
+  padding: 25px;
 `;
 
 export default LinkHeader;
