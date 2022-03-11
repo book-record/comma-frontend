@@ -92,6 +92,9 @@ const ImageFrame = styled.div`
   img {
     width: 200px;
   }
+  p {
+    width: 230px;
+  }
 `;
 
 const TextContainer = styled.div`
