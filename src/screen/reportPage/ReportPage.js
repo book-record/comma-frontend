@@ -40,11 +40,6 @@ function ReportPages() {
           userId
         );
 
-        if (!totalPage || !reportList) {
-          navigate("*", { replace: true });
-          return;
-        }
-
         setPosts(reportList);
         setNumberOfPages(totalPage);
       } catch (error) {

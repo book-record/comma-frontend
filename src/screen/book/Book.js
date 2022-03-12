@@ -58,26 +58,30 @@ function Book() {
   );
 
   const handlePushGood = async (e) => {
-    if (bestReview._id === e.target.id) {
-      if (bestReview.likes.includes(user.id)) {
-        await getReview(e.target.id, user.id, false);
-      } else {
-        await getReview(e.target.id, user.id, true);
-      }
-      setIsClick(true);
-      return;
-    }
-
-    book.reviewHistory.map(async (creator) => {
-      if (creator._id === e.target.id) {
-        if (creator.likes.includes(user.id)) {
-          await getReview(creator._id, user.id, false);
+    try {
+      if (bestReview._id === e.target.id) {
+        if (bestReview.likes.includes(user.id)) {
+          await getReview(e.target.id, user.id, false);
         } else {
-          await getReview(creator._id, user.id, true);
+          await getReview(e.target.id, user.id, true);
         }
+        setIsClick(true);
+        return;
       }
-      setIsClick(true);
-    });
+
+      book.reviewHistory.map(async (creator) => {
+        if (creator._id === e.target.id) {
+          if (creator.likes.includes(user.id)) {
+            await getReview(creator._id, user.id, false);
+          } else {
+            await getReview(creator._id, user.id, true);
+          }
+        }
+        setIsClick(true);
+      });
+    } catch (error) {
+      navigate("*", { replace: true });
+    }
   };
 
   // eslint-disable-next-line consistent-return
@@ -101,9 +105,13 @@ function Book() {
   };
 
   const handleSubmitReview = async () => {
-    if (isValue) {
-      await createReview(id, user.id, formData);
-      setShouldIsShow(false);
+    try {
+      if (isValue) {
+        await createReview(id, user.id, formData);
+        setShouldIsShow(false);
+      }
+    } catch (error) {
+      navigate("*", { replace: true });
     }
   };
 
@@ -180,25 +188,25 @@ function Book() {
 const Content = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 90vh;
 `;
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 60px;
-  width: 90%;
-  height: 85%;
   border-radius: 10px;
+  align-items: stretch;
 `;
 
 const ImageFrame = styled.div`
   display: flex;
-  height: 523px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background: #eceff1;
   img {
+    margin-top: 15px;
     width: 180px;
   }
 `;
@@ -213,9 +221,9 @@ const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
-  height: 86%;
   padding: 20px 20px 0 20px;
   background: #fbe9e7;
+  justify-content: space-around;
 `;
 
 const TopicTitle = styled.div`
@@ -248,7 +256,7 @@ const TextContent = styled.div`
 `;
 
 const ScrollContainer = styled.div`
-  height: 240px;
+  height: 200px;
   margin-bottom: 5px;
   overflow-y: scroll;
   margin-top: 10px;
@@ -256,7 +264,6 @@ const ScrollContainer = styled.div`
 `;
 
 const RecordWrapper = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
