@@ -16,6 +16,6 @@ export const getReview = async (reviewerId, userId, good) => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("error");
   }
 };

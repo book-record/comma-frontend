@@ -10,7 +10,7 @@ export const getReportList = async (pageNumber, id) => {
     );
     return data;
   } catch (error) {
-    return error;
+    throw new Error("error");
   }
 };
 
@@ -24,7 +24,7 @@ export const createRport = async (list) => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("error");
   }
 };
 
@@ -37,6 +37,6 @@ export const getReport = async (id) => {
 
     return data;
   } catch (error) {
-    return "reportError";
+    throw new Error("error");
   }
 };

@@ -10,7 +10,7 @@ export const getBookList = async (pageNumber) => {
     );
     return data;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };
 
@@ -26,7 +26,7 @@ export const createBook = async (list) => {
 
     return data.result;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };
 
@@ -41,7 +41,7 @@ export const getBook = async (id) => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };
 
@@ -58,6 +58,6 @@ export const createReview = async (id, userId, formData) => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };

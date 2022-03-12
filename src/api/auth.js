@@ -25,7 +25,7 @@ export const firebaseLogin = async () => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };
 
@@ -45,6 +45,6 @@ export const checkUser = async () => {
 
     return data;
   } catch (error) {
-    return error;
+    throw new Error("There's an error");
   }
 };

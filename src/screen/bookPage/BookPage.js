@@ -31,12 +31,12 @@ function BookPages() {
         setPosts(bookList);
         setNumberOfPages(totalPage);
       } catch (error) {
-        throw new Error("책 리스트를 불러오지 못했습니다");
+        navigate("*", { replace: true });
       }
     };
 
     callBookList();
-  }, [pageNumber, shouldIsShow]);
+  }, [navigate, pageNumber, shouldIsShow]);
 
   const handleOnModal = () => {
     setBook([]);

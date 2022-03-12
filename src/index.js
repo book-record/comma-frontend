@@ -24,10 +24,10 @@ ReactDOM.render(
           <Route element={<RequireAuth />}>
             <Route path="/" element={<Main />} />
             <Route path="/bookList" element={<BookPages />} />
-            <Route path="/book/:id" element={<Book />} />
             <Route path="/reportList/:userId" element={<ReportPages />} />
-            <Route path="/report/:id" element={<Report />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/book/:id" element={<Book />} />
+            <Route path="/report/:id" element={<Report />} />
           </Route>
         </Routes>
       </BrowserRouter>

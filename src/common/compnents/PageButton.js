@@ -20,11 +20,13 @@ const Button = styled.button`
   margin: 8px;
   margin-top: 10px;
   &:hover {
-    background: #373737;
+    background: #ffeb3b;
+    color: black;
     cursor: pointer;
     transform: translateY(-2px);
   }
   &[disabled] {
+    color: white;
     background: grey;
     cursor: revert;
     transform: revert;

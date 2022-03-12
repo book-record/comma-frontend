@@ -109,8 +109,8 @@ function Audio() {
       <div className="reocrdingBox">
         {!onRec && (
           <>
-            <p>녹음중 </p>
             <p className="recording" />
+            <p>Recording...</p>
           </>
         )}
       </div>
@@ -149,31 +149,27 @@ function Audio() {
 
 const Recording = keyframes`
   0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+    opacity: 0.2;
   }
-  50% {
-    -webkit-transform: scale(0.9);
-            transform: scale(0.9);
+  80% {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    opacity: 1.0;
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+    opacity: 0.2;
   }
 `;
 
 const AudioWrapper = styled.div`
   margin-top: 70px;
-  .reocrdingBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    height: 80px;
-  }
   div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
   }
@@ -182,18 +178,23 @@ const AudioWrapper = styled.div`
     height: 30px;
     margin-bottom: 10px;
   }
+  .reocrdingBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 140px;
+  }
   .recording {
     background: red;
-    width: 40px;
-    height: 40px;
+    width: 10px;
+    height: 10px;
     border-radius: 30px;
-    font-size: 20px;
-    animation: ${Recording} 1s infinite;
+    animation: ${Recording} 1.2s infinite;
   }
   .buttonContainer {
     display: flex;
     flex-direction: row;
-    margin-top: 40px;
   }
 `;
 

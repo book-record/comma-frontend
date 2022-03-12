@@ -70,6 +70,11 @@ const GoogleButton = styled.button`
   img {
     width: 250px;
   }
+  &:hover {
+    background: #eceff1;
+    cursor: pointer;
+    transform: translateY(3px);
+  }
 `;
 
 export default Login;
