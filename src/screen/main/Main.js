@@ -6,6 +6,7 @@ import styled from "styled-components";
 function Main() {
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
+
   const handleMoveBookList = () => {
     navigate("/bookList");
   };
@@ -46,14 +47,14 @@ const Halfground = styled.button`
   height: 100%;
   background: #707274;
   h2 {
+    color: white;
     font-family: "Nanum Gothic", sans-serif;
     font-size: 120px;
     font-weight: 700;
-    color: white;
   }
   &:hover {
-    background: #e19894;
     transition: all 0.35s ease-in;
+    background: #e19894;
   }
 `;
 

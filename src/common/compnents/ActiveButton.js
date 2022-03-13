@@ -20,6 +20,7 @@ const Button = styled.button`
   background-color: #da6d58;
   color: #fff;
   font-size: 22px;
+  cursor: pointer;
 `;
 
 export default ActiveButton;

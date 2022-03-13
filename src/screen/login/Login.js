@@ -12,9 +12,13 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLoginButton = async () => {
-    const results = await firebaseLogin();
-    dispatch(signIn(results));
-    navigate("/");
+    try {
+      const results = await firebaseLogin();
+      dispatch(signIn(results));
+      navigate("/");
+    } catch (error) {
+      navigate("*", { replace: true });
+    }
   };
 
   return (
@@ -45,17 +49,17 @@ const BackGround = styled.div`
 `;
 
 const Container = styled.div`
-  margin: 0 auto;
-  text-align: center;
   width: 900px;
   height: 600px;
+  text-align: center;
+  margin: 0 auto;
   border-radius: 10px;
   background-color: white;
   h1 {
+    margin-bottom: 20px;
     font-family: "Nanum Gothic", sans-serif;
     font-size: 120px;
     font-weight: 700;
-    margin-bottom: 20px;
   }
   span {
     font-family: "Nanum Myeongjo", serif;
@@ -70,11 +74,7 @@ const GoogleButton = styled.button`
   img {
     width: 250px;
   }
-  &:hover {
-    background: #eceff1;
-    cursor: pointer;
-    transform: translateY(3px);
-  }
+  cursor: pointer;
 `;
 
 export default Login;

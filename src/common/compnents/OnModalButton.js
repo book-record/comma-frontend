@@ -11,12 +11,12 @@ function OnModalButton({ onClick, text }) {
 }
 
 const ModalButton = styled.button`
-  font-family: "Nanum Gothic", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
   margin: 10px 20px;
   border: none;
   background: none;
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 export default OnModalButton;

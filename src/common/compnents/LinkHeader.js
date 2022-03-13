@@ -22,12 +22,12 @@ function LinkHeader({ link, title }) {
 }
 
 const StyledLink = styled(Link)`
-  box-sizing: border-box;
   padding: 4px 8px;
+  box-sizing: border-box;
   text-align: center;
+  text-decoration: none;
   color: #fff;
   font-size: 35px;
-  text-decoration: none;
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
 `;
@@ -35,17 +35,17 @@ const StyledLink = styled(Link)`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   top: 0;
   left: 0;
-  align-items: center;
   height: 60px;
   background: #e19894;
 `;
 
 const LogoutButton = styled.button`
+  padding: 25px;
   border: none;
   background: none;
-  padding: 25px;
 `;
 
 export default LinkHeader;

@@ -130,15 +130,15 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   position: relative;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
 const BookInput = styled.input`
-  position: relative;
   display: flex;
+  position: relative;
   width: 90%;
   height: 40px;
   border-radius: 10px;
@@ -147,21 +147,20 @@ const BookInput = styled.input`
 
 const AutoContainer = styled.div`
   position: absolute;
-  border-width: 0px 1px 1px 1px;
-  border-style: solid;
-  background-color: #fff;
   top: 39px;
   left: 50%;
-  transform: translateX(-50%);
   width: 90%;
+  border-width: 0px 1px 1px 1px;
+  border-style: solid;
+  transform: translateX(-50%);
+  background-color: #fff;
 `;
 
 const Option = styled.div`
   display: flex;
+  width: 90%;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
-
   padding: 5px;
 `;
 

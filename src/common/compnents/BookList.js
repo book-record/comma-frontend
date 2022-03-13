@@ -39,40 +39,40 @@ function BookList({ posts, onClick }) {
 
 const BookListContainer = styled.ul`
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(4, 320px);
   grid-template-rows: repeat(2, 270px);
   gap: 20px;
-  justify-content: center;
 `;
 
 const BookFrame = styled.div`
   position: relative;
+  width: 230px;
   margin: 0 auto;
   text-align: center;
-  width: 230px;
-  background-color: #fff;
   border-radius: 2px 20px 20px 2px;
   box-shadow: 3px 2px 3px 3px #e0e0e0;
+  background-color: #fff;
   img {
-    margin-top: 5px;
     width: 150px;
     height: 200px;
+    margin-top: 5px;
   }
   p {
     font-family: "Nanum Gothic", sans-serif;
     font-size: 13px;
   }
   &:hover {
+    transform: translateY(-4px);
     background: #eceff1;
     cursor: pointer;
-    transform: translateY(-4px);
   }
 `;
 
 const DdayText = styled.p`
+  color: ${({ date }) => (date === "D-day" ? "red" : "#000")};
   font-family: "Nanum Gothic", sans-serif;
   font-size: 10px;
-  color: ${({ date }) => (date === "D-day" ? "red" : "#000")};
 `;
 
 export default BookList;

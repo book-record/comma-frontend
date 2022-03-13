@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { createReview, getBook } from "../../api/book";
-import { getReview } from "../../api/review";
+import { updateReview } from "../../api/review";
 import ActiveButton from "../../common/compnents/ActiveButton";
 import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
@@ -30,14 +30,14 @@ function Book() {
   const { formData, isValue } = useSelector((state) => state.record);
   const address = `/reportList/${user.id}`;
 
-  const isComponentMounted = useIsMount();
+  const componentMounted = useIsMount();
 
   useEffect(() => {
     const callBook = async () => {
       try {
         const data = await getBook(id);
         data.reviewHistory.sort((a, b) => b.likes.length - a.likes.length);
-        if (isComponentMounted.current) {
+        if (componentMounted.current) {
           setBestReview(data.reviewHistory.shift());
           setBook(data);
           setIsRecive(true);
@@ -50,7 +50,7 @@ function Book() {
     };
 
     callBook();
-  }, [id, isComponentMounted, isClick, shouldIsShow, navigate]);
+  }, [id, componentMounted, isClick, shouldIsShow, navigate]);
 
   const Header = useMemo(
     () => <LinkHeader link={address} title="타임캡슐" />,
@@ -61,9 +61,9 @@ function Book() {
     try {
       if (bestReview._id === e.target.id) {
         if (bestReview.likes.includes(user.id)) {
-          await getReview(e.target.id, user.id, false);
+          await updateReview(e.target.id, user.id, false);
         } else {
-          await getReview(e.target.id, user.id, true);
+          await updateReview(e.target.id, user.id, true);
         }
         setIsClick(true);
         return;
@@ -72,9 +72,9 @@ function Book() {
       book.reviewHistory.map(async (creator) => {
         if (creator._id === e.target.id) {
           if (creator.likes.includes(user.id)) {
-            await getReview(creator._id, user.id, false);
+            await updateReview(creator._id, user.id, false);
           } else {
-            await getReview(creator._id, user.id, true);
+            await updateReview(creator._id, user.id, true);
           }
         }
         setIsClick(true);
@@ -220,10 +220,10 @@ const BestReviewContainer = styled.div`
 const TextFrame = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   width: 40%;
   padding: 20px 20px 0 20px;
   background: #fbe9e7;
-  justify-content: space-around;
 `;
 
 const TopicTitle = styled.div`
@@ -239,20 +239,20 @@ const TextTitle = styled.div`
 `;
 
 const TextAuthor = styled.div`
+  width: 90%;
+  margin: 10px 0 10px 0;
+  color: #da6d58;
   font-size: 15px;
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
-  color: #da6d58;
-  margin: 10px 0 10px 0;
-  width: 90%;
 `;
 
 const TextContent = styled.div`
-  font-size: 15px;
   border-top: 1px solid black;
+  padding: 15px 0 15px 0;
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
-  padding: 15px 0 15px 0;
+  font-size: 15px;
 `;
 
 const ScrollContainer = styled.div`
@@ -284,9 +284,9 @@ const ButtonContainer = styled.div`
 `;
 
 const ErrorMessage = styled.div`
+  margin-top: 15px;
   color: black;
   font-size: 30px;
-  margin-top: 15px;
   font-weight: 400;
 `;
 

@@ -12,6 +12,7 @@ import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import OnModalButton from "../../common/compnents/OnModalButton";
 import PageNation from "../../common/compnents/PageNation";
+import { LIMIT } from "../../common/constants/MESSAGE";
 import Text from "./components/Text";
 import Title from "./components/Title";
 
@@ -27,8 +28,8 @@ function ReportPages() {
   const [reportTitle, setReportTitle] = useState("");
   const [reportText, setRerpotText] = useState("");
 
-  const limitText = 500;
-  const limitTitle = 20;
+  const limitText = LIMIT.TEXT;
+  const limitTitle = LIMIT.TEXT;
   const textValue = limitText - reportText.length;
   const navigate = useNavigate();
 
@@ -166,20 +167,20 @@ function ReportPages() {
   );
 }
 const Background = styled.div`
-  margin: 0;
-  padding: 0;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 `;
 
 const ImageFrame = styled.div`
-  width: 50%;
-  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
+  height: 400px;
   img {
     width: 45%;
   }
@@ -203,16 +204,16 @@ const TextFrame = styled.div`
 `;
 
 const RecordWrapper = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 100%;
   div {
-    color: black;
-    font-size: 30px;
     margin-top: 15px;
+    color: black;
     font-weight: 400;
+    font-size: 30px;
   }
 `;
 

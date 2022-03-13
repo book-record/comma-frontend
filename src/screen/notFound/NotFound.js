@@ -15,11 +15,11 @@ function NotFound() {
 const NotFoundPage = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 40px;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background: #e0e0e0;
+  font-size: 40px;
   div {
     margin-bottom: 300px;
   }
