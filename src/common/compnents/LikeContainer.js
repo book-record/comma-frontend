@@ -23,11 +23,11 @@ const HeartContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
   text-align: center;
   padding: 0 5px;
-  margin: 14px 0 14px 0;
   border-radius: 10px;
-  height: 40px;
+  height: 38px;
   background: #f4495b;
   p {
     margin-left: 2px;

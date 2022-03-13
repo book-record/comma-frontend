@@ -132,7 +132,7 @@ function Book() {
               )}
               {!bestReview && (
                 <BestReviewContainer>
-                  <h2>아직 베스트 평이 없습니다</h2>
+                  <h2>베스트 한줄평이 없습니다</h2>
                 </BestReviewContainer>
               )}
             </ImageFrame>
@@ -214,6 +214,7 @@ const ImageFrame = styled.div`
 const BestReviewContainer = styled.div`
   display: flex;
   padding: 10px;
+  margin-top: 20px;
   background: #9ea7aa;
 `;
 

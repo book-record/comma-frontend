@@ -40,7 +40,8 @@ const BackGround = styled.div`
 const UserInfo = styled.div`
   display: flex;
   justify-content: space-evenly;
-  font-size: 25px;
+  align-items: center;
+  font-size: 22px;
 `;
 
 export default BestReview;

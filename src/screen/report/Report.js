@@ -102,7 +102,8 @@ const ImageFrame = styled.div`
     width: 200px;
   }
   p {
-    width: 230px;
+    width: 240px;
+    font-weight: 700;
   }
 `;
 
