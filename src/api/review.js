@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const getReview = async (reviewerId, userId, good) => {
+import { ERROR } from "../common/constants/MESSAGE";
+
+export const updateReview = async (reviewerId, userId, good) => {
   try {
     const { data } = await axios.put(
       `${process.env.REACT_APP_BASE_URL}/review`,
@@ -16,6 +18,6 @@ export const getReview = async (reviewerId, userId, good) => {
 
     return data;
   } catch (error) {
-    throw new Error("error");
+    throw new Error(ERROR.UNKNOWN_ERROR);
   }
 };

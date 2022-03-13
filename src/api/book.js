@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { ERROR } from "../common/constants/MESSAGE";
+
 export const getBookList = async (pageNumber) => {
   try {
     const { data } = await axios.get(
@@ -10,7 +12,7 @@ export const getBookList = async (pageNumber) => {
     );
     return data;
   } catch (error) {
-    throw new Error("There's an error");
+    throw new Error(ERROR.NO_BOOKLIST_DATA);
   }
 };
 
@@ -26,7 +28,7 @@ export const createBook = async (list) => {
 
     return data.result;
   } catch (error) {
-    throw new Error("There's an error");
+    throw new Error(ERROR.UNKNOWN_ERROR);
   }
 };
 
@@ -41,7 +43,7 @@ export const getBook = async (id) => {
 
     return data;
   } catch (error) {
-    throw new Error("There's an error");
+    throw new Error(ERROR.NO_BOOK_DATA);
   }
 };
 
@@ -58,6 +60,6 @@ export const createReview = async (id, userId, formData) => {
 
     return data;
   } catch (error) {
-    throw new Error("There's an error");
+    throw new Error(ERROR.NO_AUDIO_DATA);
   }
 };
