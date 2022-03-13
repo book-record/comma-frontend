@@ -1,6 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
+import { fireEvent, render, screen } from "../../utils/test-utils";
 import ActiveButton from "../ActiveButton";
 
 describe("<ActiveButton />", () => {
@@ -9,7 +9,7 @@ describe("<ActiveButton />", () => {
     <ActiveButton onClick={onClick} disabled={false} title="hello" />
   );
 
-  it("ActiveButton props넘어온 값 확인 및 클릭이벤트 시 확인여부", () => {
+  it("ActiveButton props넘어온 값 확인 및 클릭시 클릭 여부", () => {
     const button = getByRole("button");
 
     fireEvent.click(button);

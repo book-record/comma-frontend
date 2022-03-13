@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OnModalButton> OnModalButton props로 넘어온 값이 잘 넘어왔는지 확인 1`] = `
+<div>
+  <button
+    class="sc-bdvvtL fqMHbG"
+    type="button"
+  >
+    보내다
+  </button>
+</div>
+`;

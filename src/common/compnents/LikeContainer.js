@@ -25,15 +25,14 @@ const HeartContainer = styled.div`
   align-items: center;
   text-align: center;
   padding: 0 5px;
-  margin-top: 18px;
-  margin-bottom: 14px;
+  margin: 14px 0 14px 0;
   border-radius: 10px;
   height: 40px;
   background: #f4495b;
   p {
-    margin-left: 4px;
+    margin-left: 2px;
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
   }
 `;
 export default LikeContainer;

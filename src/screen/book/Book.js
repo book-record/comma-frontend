@@ -50,7 +50,7 @@ function Book() {
     };
 
     callBook();
-  }, [id, componentMounted, isClick, shouldIsShow, navigate]);
+  }, [componentMounted, isClick, shouldIsShow]);
 
   const Header = useMemo(
     () => <LinkHeader link={address} title="타임캡슐" />,

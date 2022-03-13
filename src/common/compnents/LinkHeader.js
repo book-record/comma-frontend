@@ -30,6 +30,7 @@ const StyledLink = styled(Link)`
   font-size: 35px;
   font-family: "Nanum Gothic", sans-serif;
   font-weight: 700;
+  min-width: 100px;
 `;
 
 const Header = styled.div`

@@ -21,7 +21,7 @@ const Button = styled.button`
   font-size: 18px;
   &:hover {
     transform: translateY(-2px);
-    background: #ffeb3b;
+    background: #ed806a;
     color: black;
     cursor: pointer;
   }
