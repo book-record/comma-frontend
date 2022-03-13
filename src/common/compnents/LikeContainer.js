@@ -23,17 +23,16 @@ const HeartContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
   text-align: center;
-  background: #f4495b;
   padding: 0 5px;
-  margin-top: 18px;
-  margin-bottom: 14px;
-  height: 40px;
   border-radius: 10px;
+  height: 38px;
+  background: #f4495b;
   p {
+    margin-left: 2px;
     color: #fff;
-    font-size: 18px;
-    margin-left: 4px;
+    font-size: 20px;
   }
 `;
 export default LikeContainer;

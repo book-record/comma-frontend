@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 import { checkUser } from "../../api/auth";
 import { signIn } from "../../store/userSlice";
-import isLogined from "../constants/AUTH";
+import isLogined from "../utils/auth";
 
 function RequireAuth() {
   const dispatch = useDispatch();

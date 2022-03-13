@@ -186,10 +186,10 @@ const AudioWrapper = styled.div`
     height: 140px;
   }
   .recording {
-    background: red;
     width: 10px;
     height: 10px;
     border-radius: 30px;
+    background: red;
     animation: ${Recording} 1.2s infinite;
   }
   .buttonContainer {

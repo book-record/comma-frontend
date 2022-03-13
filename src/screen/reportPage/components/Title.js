@@ -14,13 +14,13 @@ function Title({ title, onChange }) {
 }
 
 const TitleInput = styled.input`
+  width: 400px;
   margin-top: 40px;
   margin-bottom: 20px;
-  width: 400px;
-  font-size: 15px;
   border: none;
-  text-align: center;
   border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 15px;
   :focus {
     outline: none;
   }

@@ -24,6 +24,7 @@ function BookPages() {
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
   const address = `/reportList/${id}`;
+
   useEffect(() => {
     const callBookList = async () => {
       try {
@@ -127,20 +128,20 @@ function BookPages() {
 }
 
 const Background = styled.div`
-  margin: 0;
-  padding: 0;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
 `;
 
 const ImageFrame = styled.div`
-  width: 50%;
-  height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
+  height: 400px;
   img {
     width: 45%;
   }
@@ -159,21 +160,21 @@ const TextTitle = styled.div`
 `;
 
 const TextAuthor = styled.div`
+  width: 90%;
+  margin: 20px 0 10px 0;
+  color: #da6d58;
   font-size: 15px;
   font-family: "Nanum Gothic Coding", monospace;
   font-weight: 700;
-  color: #da6d58;
-  margin: 20px 0 10px 0;
-  width: 90%;
 `;
 
 const TextContent = styled.div`
-  font-size: 15px;
-  font-family: "Nanum Gothic Coding", monospace;
-  font-weight: 700;
   width: 95%;
   border-top: 1px solid black;
   padding-top: 10px;
+  font-size: 15px;
+  font-family: "Nanum Gothic Coding", monospace;
+  font-weight: 700;
 `;
 
 const ErrorMessage = styled.div`

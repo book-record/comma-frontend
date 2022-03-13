@@ -25,47 +25,47 @@ function ModalBackground({ show, onClose, onClick, children, title }) {
 }
 
 const ModalBack = styled.div`
-  z-index: 100;
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
   background-color: #ffdb92;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ModalInside = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 1200px;
   height: 640px;
-  background-color: #fff1e8;
   border-radius: 10px;
+  background-color: #fff1e8;
 `;
 
 const ModalContent = styled.div`
   display: flex;
   width: 1000px;
   height: 490px;
-  background-color: #fff;
   border-radius: 10px;
   margin-top: 40px;
   flex-direction: column;
   flex-wrap: wrap;
+  background-color: #fff;
 `;
 
 const ButtonContainer = styled.div`
-  width: 84%;
   display: flex;
-  margin-top: 20px;
   justify-content: flex-end;
   flex-direction: row;
+  width: 84%;
+  margin-top: 20px;
 `;
 
 export default ModalBackground;

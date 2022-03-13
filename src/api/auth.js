@@ -1,6 +1,7 @@
 import { signInWithPopup } from "@firebase/auth";
 import axios from "axios";
 
+import { ERROR } from "../common/constants/MESSAGE";
 import { auth, provider } from "./firebase";
 
 const AUTHORIZATION = "Authorization";
@@ -25,7 +26,7 @@ export const firebaseLogin = async () => {
 
     return data;
   } catch (error) {
-    throw new Error("There's an error");
+    throw new Error(ERROR.NO_USER_DATA);
   }
 };
 

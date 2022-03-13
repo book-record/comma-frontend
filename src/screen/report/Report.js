@@ -76,6 +76,7 @@ const BookBackground = styled.div`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  min-width: 1000px;
   height: 75vh;
   margin-top: 50px;
   font-family: "Nanum Gothic", sans-serif;
@@ -83,11 +84,11 @@ const BookBackground = styled.div`
 
 const ImageContainer = styled.div`
   display: flex;
-  text-align: center;
   justify-content: space-between;
   justify-content: center;
   height: 80%;
   width: 32%;
+  text-align: center;
   min-width: 300px;
 `;
 
@@ -101,17 +102,18 @@ const ImageFrame = styled.div`
     width: 200px;
   }
   p {
-    width: 230px;
+    width: 240px;
+    font-weight: 700;
   }
 `;
 
 const TextContainer = styled.div`
   display: flex;
-  margin-top: 20px;
+  justify-content: center;
   height: 80%;
   width: 27%;
-  justify-content: center;
   min-width: 300px;
+  margin-top: 20px;
   h2 {
     text-align: center;
   }

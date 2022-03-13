@@ -14,22 +14,22 @@ const Button = styled.button`
   border: none;
   border-radius: 4px;
   padding: 8px;
+  margin: 8px;
+  margin-top: 10px;
   background: black;
   color: white;
   font-size: 18px;
-  margin: 8px;
-  margin-top: 10px;
   &:hover {
-    background: #ffeb3b;
+    transform: translateY(-2px);
+    background: #ed806a;
     color: black;
     cursor: pointer;
-    transform: translateY(-2px);
   }
   &[disabled] {
-    color: white;
-    background: grey;
-    cursor: revert;
     transform: revert;
+    background: grey;
+    color: white;
+    cursor: revert;
   }
 `;
 
