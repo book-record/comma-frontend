@@ -29,6 +29,9 @@ const HeartContainer = styled.div`
   border-radius: 10px;
   height: 38px;
   background: #f4495b;
+  div {
+    cursor: pointer;
+  }
   p {
     margin-left: 2px;
     color: #fff;

@@ -78,7 +78,7 @@ function ReportPages() {
           ? reportText.slice(0, limitText)
           : reportText,
       startDate: new Date().toISOString(),
-      finishDate: dayjs(new Date()).add(1, "y").toISOString(),
+      finishDate: dayjs(new Date()).add(1, "m").toISOString(),
     };
 
     await createRport(list);
@@ -126,7 +126,7 @@ function ReportPages() {
           show={shouldIsShow}
           onClose={handleCloseModal}
           onClick={handleSaveReport}
-          title="1년 후"
+          title="1분 후"
         >
           <FindBook
             setBook={setBook}
