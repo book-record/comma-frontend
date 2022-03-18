@@ -2,7 +2,7 @@
 
 `#책` `#기록` `#음성` `#추억`
 
-### 책에 대한 감상평 이제 목소리로 듣고 기록하자
+### 감상평 이제 목소리로 듣고 책에 대한 기록을 보내보자
 
 <br/>
 
@@ -10,7 +10,7 @@
 
 - [✨ 동기](#동기)
 - [📖 쉼표](#쉼표)
-- [🔗 링크](#링크)
+- [🔗 배포링크](#배포링크)
 - [⚙️ 설치법](#%EF%B8%8F설치법)
 - [🛠️ 기술스택](%EF%B8%8F기술스택)
 - [⏰ 작업기간](#작업기간)
@@ -32,21 +32,21 @@
 # 📖쉼표
 
 <h4>한줄평페이지</h4>
-<img width="1436" alt="스크린샷 2022-03-14 16 03 54" src="https://user-images.githubusercontent.com/80472881/158123062-e18a9bfb-266e-4810-b477-881d0fced154.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 36 38" src="https://user-images.githubusercontent.com/80472881/158996755-81c8ca23-452e-49e6-aa36-b60ae072d458.png">
 
 - 한줄평 페이지에서는 다른 사용자들이 등록한 책을 볼 수 있습니다.
   <br />
   <br />
 
 <h4>책 등록페이지</h4>
-<img width="1436" alt="스크린샷 2022-03-14 16 05 15" src="https://user-images.githubusercontent.com/80472881/158123631-0227d318-350d-42d7-a173-35d626ac97d9.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 37 20" src="https://user-images.githubusercontent.com/80472881/158996816-f605843e-ea75-40c0-89bc-63bef3dcee42.png">
 
 - 사용자는 책 제목을 통해 책을 찾을 수 있고, 책 등록 페이지에 책을 등록 할 수 있습니다.
   <br />
   <br />
 
 <h4>한줄평 등록 페이지
-<img width="1436" alt="스크린샷 2022-03-14 16 05 51" src="https://user-images.githubusercontent.com/80472881/158123793-86f49455-ca1c-4180-9b05-9773ad669922.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 37 43" src="https://user-images.githubusercontent.com/80472881/158996860-9eaa09ed-b3d8-4b00-b96c-6a177a07a6ac.png">
 
 - 사용자는 책에 대한 감상평을 음성으로 남길 수 있습니다. 본인의 목소리를 들을 수 있고,
   20초내에 기록을 남길 수 있고 저장할 수 있습니다.
@@ -54,27 +54,34 @@
   <br />
 
 <h4>사용자가 책에 대해 한줄평 등록 후 페이지
-<img width="1436" alt="스크린샷 2022-03-14 16 06 15" src="https://user-images.githubusercontent.com/80472881/158124149-f0377b5f-2278-46f9-b6c9-f3afce2c4b2c.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 38 11" src="https://user-images.githubusercontent.com/80472881/158996896-c1924ce8-35e8-464b-b4a3-0e160c4bb492.png">
 
 - 사용자는 다른 사용자들이 남긴 책에 대한 감상평을 들을 수 있습니다. 한 감상평 당 하나의 좋아요를 누를 수 있습니다. 좋아요가 많은 순서대로 한줄평은 나열됩니다.
   <br />
   <br />
 
 <h4>타임캡슐 등록페이지
-<img width="1436" alt="스크린샷 2022-03-14 16 07 13" src="https://user-images.githubusercontent.com/80472881/158124300-5e69fcce-e486-4f17-b0b9-3f13641d9173.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 38 33" src="https://user-images.githubusercontent.com/80472881/158996941-24096c17-e8f6-4235-8e69-4b1b6dcae4f1.png">
 
 - 사용자는 책에 대한 독후감을 작성할 수 있습니다. 제목과 텍스트로 기록이 가능하며, 열람은 1년 후 가능합니다.
   <br />
   <br />
 
 <h4>타임캡슐 페이지
-  <img width="1436" alt="스크린샷 2022-03-14 16 12 28" src="https://user-images.githubusercontent.com/80472881/158130418-d26f4c18-c69d-4231-9f46-56018dafb21b.png">
+<img width="1437" alt="스크린샷 2022-03-18 20 39 06" src="https://user-images.githubusercontent.com/80472881/158996979-d92c9887-fc16-4362-b8b3-bcbac96badfd.png">
 
-- 사용자는 D-day가 되지 못한 책은 열어보지 못하고, D-day가 지난 책만 열람이 가능하다.
+- 사용자는 D-day가 되지 못한 책은 열어보지 못하고, D-day가 지난 책만 열람이 가능합니다.
+  <br />
+  <br />
+  
+  <h4>이메일
+<img width="1437" alt="스크린샷 2022-03-18 20 43 13" src="https://user-images.githubusercontent.com/80472881/158997204-0c686a41-cf3a-459e-bc27-69429f425413.png">
+
+- D-day가 된 날 이메일로 사용자에게 열람이 가능하다는 이메일이 발송됩니다.
   <br />
   <br />
 
-# 🔗링크
+# 🔗배포링크
 
 - [yoran.cc](https://yoran.cc)
   
@@ -99,8 +106,8 @@ REACT_APP_FIREBASE_APP_ID=
 REACT_APP_KAKAO_BOOK_SEARCH_API=
 ```
 
-- FIREBASE 관련 키 값은 https://console.firebase.google.com/ 접속 후, 프로젝트 추가 후, 프로젝트 개요에서 웹 앱에 Firebase추가 시, 나오는 키 값을 입력해주세요.
-- KAKAO 관련 키 값은 https://developers.kakao.com/ 로그인 후, 개발자 등록을 하고 난 뒤, 카카오 API 키를 발급 받을 수 있습니다. 그 후 키 값을 입력해주세요.
+- FIREBASE 관련 키 값은 https://console.firebase.google.com 접속 후, 프로젝트 추가 후, 프로젝트 개요에서 웹 앱에 Firebase추가 시, 나오는 키 값을 입력해주세요.
+- KAKAO 관련 키 값은 https://developers.kakao.com 로그인 후, 개발자 등록을 하고 난 뒤, 카카오 API 키를 발급 받을 수 있습니다. 그 후 키 값을 입력해주세요.
   <br />
   <br />
 
@@ -183,7 +190,7 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
 1. 국내 도서 검색 OPEN API를 조사하면서 생각보다 책 검색API가 많지 않았다. 대표 포털 사이트인 네이버와 카카오, 국립중앙도서관, 인터파크 등 서로의 장단점이 명확해서 어떤 API를 써야 될지 고민이 많았다. 네이버 같은 경우 도서 표지 이미지가 작았었고, 국립중앙도서관은 국립중앙도서관에 있는 책에 관해서 정보를 제공했기 때문에 선택지가 많지 않았다.
    <br/>
 
-   카카오 책 API를 이용하면서 가장 불편했던 점은 문자열을 보내는데 책에 대한 contents가 자체적으로 잘려져서 넘어온다. 그런데 그 부분이 어떨 때는 짤려진 상태로 짧게 넘어오는 상황이 발생했다. 그 부분이 책 API를 쓸 때 많은 아쉬움으로 남는다.
+   카카오 책 API를 이용하면서 가장 불편했던 점은 문자열을 보내는데 책에 대한 contents가 자체적으로 잘려져서 넘어온다. 그런데 그 부분이 어떨 때는 짤려진 상태로 짧게 넘어오는 상황이 발생했다. 또한 contents가 중간 중간 이상한 문자열이 껴있는 상태에서 넘어왔어서 일일이 대응하지 못한 점이 아쉬움이 남는다.
 <br/>
 
 2.  좋아요 버튼은 사용자가 좋아요를 클릭 시 빨간하트로 바뀌고, 만약 좋아요를 취소한다면 빈 하트가 나오도록 로직을 구현했다. 하지만 리렌더링이 2-3번이 일어나는 버그가 발생했다. 그리고 좋아요가 0인 하트를 빠르게 누르면 1과 0만 나와야되는데 그 이상의 숫자가 나오는 버그가 발생했다.
