@@ -1,8 +1,15 @@
+
+<img src="https://img.shields.io/badge/REACT-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/REDUX-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/STYLEDCOMPONENTS-DB7093?style=for-the-badge&logo=Styled-components&logoColor=white"> <img src="https://img.shields.io/badge/NODE.JS-339933?style=for-the-badge&logo=Node.js&logoColor=white"> <img src="https://img.shields.io/badge/EXPRESS-000000?style=for-the-badge&logo=Express&logoColor=white"> <img src="https://img.shields.io/badge/MONGODB-47A248?style=for-the-badge&logo=MongoDB&logoColor=white">
+<br />
+<img src="https://img.shields.io/badge/JEST-C21325?style=for-the-badge&logo=Jest&logoColor=white"> <img src="https://img.shields.io/badge/TESTING LIBRARY-E33332?style=for-the-badge&logo=Testing Library&logoColor=white">
+<br />
+<img src="https://img.shields.io/badge/NETLIFY-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"> <img src="https://img.shields.io/badge/AMAZON AWS-232F3E?style=for-the-badge&logo=Amazon AWS&logoColor=white">
+
 # 📖 쉼표
 
 `#책` `#기록` `#음성` `#추억`
 
-### 감상평 이제 목소리로 듣고 책에 대한 기록을 보내보자
+### 책의 한줄평은 목소리로 듣고, 기억은 내일의 나에게 보내자
 
 <br/>
 
@@ -12,7 +19,7 @@
 - [📖 쉼표](#쉼표)
 - [🔗 배포링크](#배포링크)
 - [⚙️ 설치법](#%EF%B8%8F설치법)
-- [🛠️ 기술스택](%EF%B8%8F기술스택)
+- [🛠️ 기술스택](#%EF%B8%8F기술스택)
 - [⏰ 작업기간](#작업기간)
 - [🚨 리뷰](#리뷰)
 - [🖋마지막으로](#마지막으로)
@@ -21,11 +28,11 @@
 
 # ✨동기
 
-- 학생 시절에 책을 많이 읽었었던 기억이 있습니다. 다양한 장르들의 책들과 함께 밤을 지새우며 시간을 보낸 적도 있었습니다.
+학생 시절에 책을 많이 읽었었던 기억이 있습니다. 다양한 장르들의 책들과 함께 밤을 지새우며 시간을 보낸 적도 있었습니다.
 
-- 책을 읽고 난 뒤, 메모지에 기록을 해놨지만 시간이 지난 후 그 책에 대한 기록들을 찾고 싶어도 잃어버려서 찾지 못한 적이 많았었습니다.
+책을 읽고 난 뒤, 메모지에 기록을 해놨지만 시간이 지난 후 그 책에 대한 기록들을 찾고 싶어도 잃어버려서 찾지 못한 적이 많았었습니다.
 
-- 내가 읽었던 책의 내용도 기록 하고, 다른 누군가에게 내가 읽었었던 책에 대해서도 감상평을 공유 할 수 있으면 더 좋을 것 같다라는 생각으로 프로젝트를 기획했습니다.
+내가 읽었던 책의 내용도 기록 하고, 다른 누군가에게 내가 읽었었던 책에 대해서도 감상평을 공유 할 수 있으면 더 좋을 것 같다라는 생각으로 프로젝트를 기획했습니다.
 
 <br />
 
@@ -75,15 +82,15 @@
   <br />
   
   <h4>이메일
-<img width="1437" alt="스크린샷 2022-03-18 20 43 13" src="https://user-images.githubusercontent.com/80472881/158997204-0c686a41-cf3a-459e-bc27-69429f425413.png">
+<img width="1038" alt="image" src="https://user-images.githubusercontent.com/80472881/159150257-52149fc0-c6c1-4e71-8bfe-2dda283b8da4.png">
 
-- D-day가 된 날 이메일로 사용자에게 열람이 가능하다는 이메일이 발송됩니다.
+- D-day가 된 날, 사용자에게 열람이 가능하다는 이메일이 발송됩니다.
   <br />
   <br />
 
 # 🔗배포링크
 
-- [yoran.cc](https://yoran.cc)
+### [yoran.cc](https://yoran.cc)
   
 
 <br />
@@ -136,7 +143,7 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
 
 # 🛠️기술스택
 
-## Frontend
+### Frontend
 
 - React (CRA)
 - Redux, Redux toolkit
@@ -146,7 +153,7 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
   - Jest
   - TestingLibrary
 
-## Backend
+### Backend
 
 - Node.js
 - Express
@@ -156,7 +163,7 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
 - AWS S3
 - Jest
 
-## Deployment
+### Deployment
 
 - Client - Netlify
 - Server - AWS Elastic Beanstalk
@@ -166,7 +173,6 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
 # ⏰작업기간
 
 본 프로젝트는 2022.2.21 ~ 3.13 총 3주간(20일) 진행 되었습니다.
-
 - 1주차 : `기획 및 설계단계`
   - 아이디어 기획
   - [Mockup 작업](https://www.notion.so/668bf5c6c8a3470aadec31a6dd598017)
@@ -220,7 +226,7 @@ NODEMAILER_PASS="본인의 이메일 비밀번호"
 
 # 🖋마지막으로
 
-- “과연 내가 할 수 있을까? 해야한다” 프로젝트를 하면서 매일 되새겼던 말이였습니다. 처음이였던 프로젝트를 꼭 해내고 싶은 마음이 컸습니다. 누구에게도 도움을 받을 수 없고 스스로 방법을 찾아서 스스로 해내야했기 때문에 더 많은 시간과 노력을 쏟았던 것 같습니다.
-  <br />
+“과연 내가 할 수 있을까? 해야한다” 프로젝트를 하면서 매일 되새겼던 말이였습니다. 처음이였던 프로젝트를 꼭 해내고 싶은 마음이 컸습니다. 누구에게도 도움을 받을 수 없고 스스로 방법을 찾아서 스스로 해내야했기 때문에 더 많은 시간과 노력을 쏟았던 것 같습니다.
+ <br />
 
-- 개발자로써 아직 부족하다 생각되지만 부트캠프 기회를 통해 개발에 대해서, 개발자가 가져야 할 사항들에 대해서 배울 수 있었습니다. 부트캠프를 통해 동기분들과 그리고 함께 지지해주셨던 멘토분들 그리고 정신적 지주이신 켄님을 통해 개발에 대해서 그리고 좋은 개발자로 나아갈 방향성을 잡아주신 덕분에 마지막 개인프로젝트까지 잘 마무리 한 것 같습니다. 더 좋은 개발자가 되기 위해 늘 마음에 새기며 더 나은 개발자가 될 수 있도록 노력하겠습니다.
+개발자로써 아직 부족하다 생각되지만 부트캠프 기회를 통해 개발에 대해서, 개발자가 가져야 할 사항들에 대해서 배울 수 있었습니다. 부트캠프를 통해 동기분들과 그리고 함께 지지해주셨던 멘토분들 그리고 정신적 지주이신 켄님을 통해 개발에 대해서 그리고 좋은 개발자로 나아갈 방향성을 잡아주신 덕분에 마지막 개인프로젝트까지 잘 마무리 한 것 같습니다. 더 좋은 개발자가 되기 위해 늘 마음에 새기며 더 나은 개발자가 될 수 있도록 노력하겠습니다.
