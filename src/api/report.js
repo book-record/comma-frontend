@@ -5,10 +5,7 @@ import { ERROR } from "../common/constants/MESSAGE";
 export const getReportList = async (pageNumber, id) => {
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/report/${id}/list?page=${pageNumber}`,
-      {
-        withCredentials: true,
-      }
+      `${process.env.REACT_APP_BASE_URL}/report/${id}/list?page=${pageNumber}`
     );
     return data;
   } catch (error) {
@@ -20,8 +17,7 @@ export const createRport = async (list) => {
   try {
     const { data } = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/report/new`,
-      list,
-      { withCredentials: true }
+      list
     );
 
     return data;
@@ -33,8 +29,7 @@ export const createRport = async (list) => {
 export const getReport = async (id) => {
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/report/${id}`,
-      { withCredentials: true }
+      `${process.env.REACT_APP_BASE_URL}/report/${id}`
     );
 
     return data;

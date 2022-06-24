@@ -10,9 +10,6 @@ export const updateReview = async (reviewerId, userId, good) => {
         reviewerId,
         userId,
         good,
-      },
-      {
-        withCredentials: true,
       }
     );
 

@@ -5,10 +5,7 @@ import { ERROR } from "../common/constants/MESSAGE";
 export const getBookList = async (pageNumber) => {
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/book/list?page=${pageNumber}`,
-      {
-        withCredentials: true,
-      }
+      `${process.env.REACT_APP_BASE_URL}/book/list?page=${pageNumber}`
     );
     return data;
   } catch (error) {
@@ -20,10 +17,7 @@ export const createBook = async (list) => {
   try {
     const { data } = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/book/new`,
-      list,
-      {
-        withCredentials: true,
-      }
+      list
     );
 
     return data.result;
@@ -31,14 +25,12 @@ export const createBook = async (list) => {
     throw new Error(ERROR.UNKNOWN_ERROR);
   }
 };
+// 책 API 관련은 백엔드가 나을 것 같다.
 
 export const getBook = async (id) => {
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/book/${id}`,
-      {
-        withCredentials: true,
-      }
+      `${process.env.REACT_APP_BASE_URL}/book/${id}`
     );
 
     return data;
@@ -54,7 +46,6 @@ export const createReview = async (id, userId, formData) => {
       formData,
       {
         header: { "content-type": "multipart/form-data" },
-        withCredentials: true,
       }
     );
 
