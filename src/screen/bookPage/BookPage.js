@@ -11,6 +11,7 @@ import LinkHeader from "../../common/compnents/LinkHeader";
 import ModalBackground from "../../common/compnents/ModalBackground";
 import OnModalButton from "../../common/compnents/OnModalButton";
 import PageNation from "../../common/compnents/PageNation";
+import InstructionBook from "./Components/InstructionBook";
 
 function BookPages() {
   const [pageNumber, setPageNumber] = useState(0);
@@ -20,6 +21,7 @@ function BookPages() {
   const [shouldIsShow, setShouldIsShow] = useState(false);
   const [isChoice, setIsChoice] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isInstructionBook, setIsInstructionBook] = useState(false);
 
   const navigate = useNavigate();
   const id = useSelector((state) => state.user.id);
@@ -46,6 +48,11 @@ function BookPages() {
     setIsError(false);
   };
 
+  const handleOnInstructionBook = () => {
+    setIsInstructionBook(true);
+    setShouldIsShow(true);
+  };
+
   const handleChooseBook = async () => {
     if (!book[0].thumbnail) {
       book[0].thumbnail = noImage;
@@ -65,6 +72,7 @@ function BookPages() {
 
   const handleCloseModal = () => {
     setShouldIsShow(false);
+    setIsInstructionBook(false);
   };
 
   const handleMoveBook = (e) => {
@@ -80,41 +88,52 @@ function BookPages() {
     <Background>
       {Header}
       <OnModalButton onClick={handleOnModal} text="등록하기" />
-      <ModalBackground
-        show={shouldIsShow}
-        onClose={handleCloseModal}
-        onClick={handleChooseBook}
-        title="등록하기"
-      >
-        <FindBook
-          setBook={setBook}
-          setIsChoice={setIsChoice}
-          setIsError={setIsError}
-        />
-        <ImageFrame>
-          {isChoice && (
-            <img
-              src={book[0].thumbnail ? book[0].thumbnail : noImage}
-              alt={book[0].title}
-            />
-          )}
-        </ImageFrame>
-        <TextFrame>
-          {isChoice && (
-            <>
-              <div />
-              <TextTitle>{book[0].title}</TextTitle>
-              <TextAuthor>저자: {book[0].authors}</TextAuthor>
-              <TextContent>{book[0].contents}</TextContent>
-            </>
-          )}
-          {isError && (
-            <ErrorMessage>
-              이미 존재하는 책입니다 다른 책을 입력해주세요
-            </ErrorMessage>
-          )}
-        </TextFrame>
-      </ModalBackground>
+      <OnModalButton onClick={handleOnInstructionBook} text="설명서" />
+      {!isInstructionBook && (
+        <ModalBackground
+          show={shouldIsShow}
+          onClose={handleCloseModal}
+          title="등록하기"
+        >
+          <FindBook
+            setBook={setBook}
+            setIsChoice={setIsChoice}
+            setIsError={setIsError}
+          />
+          <ImageFrame>
+            {isChoice && (
+              <img
+                src={book[0].thumbnail ? book[0].thumbnail : noImage}
+                alt={book[0].title}
+              />
+            )}
+          </ImageFrame>
+          <TextFrame>
+            {isChoice && (
+              <>
+                <div />
+                <TextTitle>{book[0].title}</TextTitle>
+                <TextAuthor>저자: {book[0].authors}</TextAuthor>
+                <TextContent>{book[0].contents}</TextContent>
+              </>
+            )}
+            {isError && (
+              <ErrorMessage>
+                이미 존재하는 책입니다 다른 책을 입력해주세요
+              </ErrorMessage>
+            )}
+          </TextFrame>
+        </ModalBackground>
+      )}
+      {isInstructionBook && (
+        <ModalBackground
+          show={shouldIsShow}
+          onClose={handleCloseModal}
+          onClick={handleChooseBook}
+        >
+          <InstructionBook />
+        </ModalBackground>
+      )}
       <BookList posts={posts} onClick={handleMoveBook} />
       <footer>
         <PageNation

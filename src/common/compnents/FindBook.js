@@ -86,6 +86,7 @@ function FindBook({ setBook, setIsChoice, setIsError }) {
         handleSearchBook(text);
       }
     }, 500);
+
     return () => clearTimeout(debounce);
   }, [handleSearchBook, text]);
 
